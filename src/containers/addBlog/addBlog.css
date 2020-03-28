@@ -1,0 +1,9 @@
+.addBlogPage{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.addBlogPage > *{
+    margin-top: 2vh;
+}
