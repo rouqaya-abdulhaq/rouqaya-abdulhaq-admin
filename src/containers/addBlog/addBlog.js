@@ -38,8 +38,8 @@ class AddBlog extends React.Component{
     render(){
         return(
             <main className="addBlogPage">
-                <input onChange={this.titleEventHandler} placeholder="title"></input>
-                <textarea onChange={this.contentEventHandler}></textarea>
+                <input className="title" onChange={this.titleEventHandler} placeholder="title"></input>
+                <textarea  onChange={this.contentEventHandler} placeholder="content"></textarea>
                 <button onClick={this.submitBlogHandler}>SUBMIT</button>
             </main>
         );
