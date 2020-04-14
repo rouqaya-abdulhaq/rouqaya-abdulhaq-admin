@@ -1,0 +1,7 @@
+header{
+    display: flex;
+    justify-content: space-evenly;
+    background: rgb(212, 205, 253);
+    height: 10vh;
+    padding-top: 4vh;
+}
