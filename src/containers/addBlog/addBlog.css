@@ -1,0 +1,35 @@
+.addBlogPage{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.addBlogPage > *{
+    margin-top: 2vh;
+}
+
+.addBlogPage textarea{
+    width: 60vw;
+	height: 80vh;
+	border: 3px solid #cccccc;
+	padding: 5px;
+    font-family: Tahoma, sans-serif;
+    box-sizing: border-box;
+    resize: none;
+}
+
+.addBlogPage textarea::-webkit-scrollbar {
+    width: 7px;
+    background-color: rgb(68, 65, 65); 
+}
+
+.addBlogPage textarea::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: rgb(16, 16, 17);
+}
+
+.addBlogPage .title{
+    width: 40vw;
+    border: 3px solid #cccccc;
+    box-sizing: border-box;
+}
