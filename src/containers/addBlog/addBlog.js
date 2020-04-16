@@ -31,8 +31,6 @@ class AddBlog extends React.Component{
     }
 
     submitBlogHandler = () =>{
-        // console.log(this.state.blog.title);
-        // console.log(this.state.blog.content);
         this.fetchSubmit();
     }
 
