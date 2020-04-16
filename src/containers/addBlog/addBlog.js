@@ -31,8 +31,29 @@ class AddBlog extends React.Component{
     }
 
     submitBlogHandler = () =>{
-        console.log(this.state.blog.title);
-        console.log(this.state.blog.content);
+        // console.log(this.state.blog.title);
+        // console.log(this.state.blog.content);
+        this.fetchSubmit();
+    }
+
+    fetchSubmit = () =>{
+        fetch("http://localhost:8000/postBlog",{
+            method : 'PUT',
+            headers : {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body : JSON.stringify({
+                title : this.state.blog.title,
+                content : this.state.blog.content
+            })
+        }).then((res)=>{
+            return res.json();
+        }).then((blog)=>{
+            console.log(blog);
+        }).catch((err)=>{
+            console.log(err)
+        })
     }
 
     render(){
