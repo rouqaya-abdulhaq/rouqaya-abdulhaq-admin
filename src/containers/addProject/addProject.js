@@ -11,6 +11,7 @@ class AddProject extends React.Component{
             url : "",
             imgUrl : ""
         }
+        this.baseState = this.state;
     }
 
     onChangeTitle = (value) =>{
@@ -39,6 +40,7 @@ class AddProject extends React.Component{
 
     onSubmit = () =>{
         this.fetchSubmit();
+        this.setState(this.baseState);
     }
 
     fetchSubmit = () =>{
@@ -67,10 +69,18 @@ class AddProject extends React.Component{
         return(
             <main>
                 <form>
-                    <input placeholder="title" onChange={(event)=>this.onChangeTitle(event.target.value)}></input>
-                    <input placeholder="url" onChange={(event)=>this.onChangeUrl(event.target.value)}></input>
-                    <input placeholder="img url" onChange={(event)=>this.onChangeImgUrl(event.target.value)}></input>
-                    <textarea placeholder="info" onChange={(event)=>this.onChangeInfo(event.target.value)}></textarea>
+                    <input placeholder="title" onChange={(event)=>this.onChangeTitle(event.target.value)}
+                        value={this.state.title}>
+                    </input>
+                    <input placeholder="url" onChange={(event)=>this.onChangeUrl(event.target.value)}
+                        value={this.state.url}>
+                    </input>
+                    <input placeholder="img url" onChange={(event)=>this.onChangeImgUrl(event.target.value)}
+                        value={this.state.imgUrl}>
+                    </input>
+                    <textarea placeholder="info" onChange={(event)=>this.onChangeInfo(event.target.value)}
+                        value={this.state.info}>
+                    </textarea>
                     <button type="button" onClick={this.onSubmit}>submit</button>
                 </form>
             </main>

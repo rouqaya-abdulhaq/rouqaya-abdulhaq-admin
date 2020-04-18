@@ -10,6 +10,7 @@ class AddBlog extends React.Component{
                 content : ""
             }
         }
+        this.baseState = this.state;
     }
 
     titleEventHandler = (event) =>{
@@ -32,6 +33,7 @@ class AddBlog extends React.Component{
 
     submitBlogHandler = () =>{
         this.fetchSubmit();
+        this.setState(this.baseState);
     }
 
     fetchSubmit = () =>{
@@ -57,8 +59,12 @@ class AddBlog extends React.Component{
     render(){
         return(
             <main className="addBlogPage">
-                <input className="title" onChange={this.titleEventHandler} placeholder="title"></input>
-                <textarea  onChange={this.contentEventHandler} placeholder="content"></textarea>
+                <input className="title" onChange={this.titleEventHandler} 
+                    placeholder="title" value={this.state.blog.title}>
+                </input>
+                <textarea  onChange={this.contentEventHandler} 
+                    placeholder="content" value={this.state.blog.content}>
+                </textarea>
                 <button onClick={this.submitBlogHandler}>SUBMIT</button>
             </main>
         );
