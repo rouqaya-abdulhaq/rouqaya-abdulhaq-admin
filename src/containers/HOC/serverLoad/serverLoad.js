@@ -34,7 +34,6 @@ class ServerLoad extends React.Component{
                 serverData : this.state.serverData
             });
         });
-        console.log(this.state);
         return(
             <div>{children}</div>
         );

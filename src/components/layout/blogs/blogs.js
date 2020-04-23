@@ -1,10 +1,12 @@
 import React from 'react';
+import ServerLoad from '../../../containers/HOC/serverLoad/serverLoad';
+import BlogsPage from './blogsPage';
 
 const blogs = (props) =>{
     return(
-        <main>
-            blogs to load
-        </main>
+    <ServerLoad url={'http://localhost:8000/loadBlogs?loadCount=0'}>
+        <BlogsPage/>
+    </ServerLoad>
     );
 }
 
