@@ -5,13 +5,16 @@ import './card.css';
 
 const card = (props) =>{
 
-    const page = props.page ? <Link to={props.page}></Link> : null;
+    const page = props.page ? <Link to={props.page}>view blog</Link> : null;
+    const website = props.url ? <a href={props.url}>url</a> : null;
+    const githubPage = props.githubUrl ? <a href={props.githubUrl}>github scource</a> : null;
+    
     return(
         <section>
             <h6>{props.title}</h6>
             <p>{props.info}</p>
-            <a href={props.url}>url</a>
-            <a href={props.githubUrl}>github scource</a>
+            {website}
+            {githubPage}
             {page}
         </section>
     );

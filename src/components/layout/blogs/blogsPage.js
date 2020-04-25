@@ -1,10 +1,18 @@
 import React from 'react';
+import Card from '../../UI/card/card';
+
+import './blogsPage.css';
 
 const blogs = (props) =>{
-    console.log(props.serverData);
+
+    const blogs = props.serverData ? props.serverData.map((blogData)=>{
+        return <Card title={blogData.title} info={blogData.info}
+        page={`/blog?blog=${blogData.title}`}  key={blogData.title}/>
+    }) : "no blogs to display";
+
     return(
-        <main>
-            blogs to load
+        <main className="blogsPage">
+           {blogs}
         </main>
     );
 }
