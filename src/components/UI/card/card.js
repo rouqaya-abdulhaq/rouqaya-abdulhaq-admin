@@ -16,6 +16,9 @@ const card = (props) =>{
             {website}
             {githubPage}
             {page}
+
+            <button onClick={props.editHandler}>edit</button>
+            <button onClick={props.deleteHandler}>delete</button>
         </section>
     );
 }
