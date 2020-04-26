@@ -9,15 +9,31 @@ const projectsPage = (props) =>{
         console.log('edit project');
     }
 
-    const deleteHandler = () =>{
-        console.log('delete project');
+    const deleteHandler = (index) =>{
+        fetch('http://localhost:8000/removeProject',{
+            method : 'DELETE',
+            headers : {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body : JSON.stringify({
+                index : index
+            })
+            }).then((res)=>{
+                return res.json();
+            }).then((res)=>{
+                props.updateState(res);
+            }).catch((err)=>{
+                console.log(err);
+            });
     }
 
-    const projects = props.serverData ? props.serverData.map((projectData)=>{
+    const projects = props.serverData ? props.serverData.map((projectData,index)=>{
         return <Card title={projectData.title} info={projectData.info}
         url={projectData.url} githubUrl={projectData.githubUrl}
         editHandler={editHandler}
-        deleteHandler={deleteHandler} 
+        deleteHandler={deleteHandler}
+        index = {index} 
         key={projectData.title}/>
     }) : "no projects to display";
     

@@ -12,6 +12,10 @@ class ServerLoad extends React.Component{
         this.fetchFromServer();
     }
 
+    updateState = (newState) =>{
+        this.setState({serverData : newState});
+    }
+
     fetchFromServer = () =>{
         fetch(this.props.url,{
             method : 'GET',
@@ -31,7 +35,8 @@ class ServerLoad extends React.Component{
     render(){
         const children = React.Children.map(this.props.children, child =>{
             return React.cloneElement(child, {
-                serverData : this.state.serverData
+                serverData : this.state.serverData,
+                updateState : this.updateState
             });
         });
         return(

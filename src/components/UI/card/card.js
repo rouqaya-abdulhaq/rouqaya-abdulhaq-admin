@@ -18,7 +18,7 @@ const card = (props) =>{
             {page}
 
             <button onClick={props.editHandler}>edit</button>
-            <button onClick={props.deleteHandler}>delete</button>
+            <button onClick={()=>props.deleteHandler(props.index)}>delete</button>
         </section>
     );
 }
