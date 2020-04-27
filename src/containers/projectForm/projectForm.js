@@ -1,68 +1,60 @@
 import React from 'react';
-import './addProject.css';
+import './projectForm.css';
 
 class AddProject extends React.Component{
 
     constructor(props){
         super(props);
         this.state = {
-            title : "",
-            info : "",
-            url : "",
-            imgUrl : ""
+            project :{
+                title : "",
+                info : "",
+                url : "",
+                imgUrl : ""
+            }
         }
-        this.baseState = this.state;
+        this.baseState = {...this.state.project};
     }
 
     onChangeTitle = (value) =>{
         this.setState({
-            title : value
+            project : {
+                ...this.state.project,
+                title : value
+            }
         });
     }
 
     onChangeInfo = (value) =>{
         this.setState({
-            info : value
+            project : {
+                ...this.state.project,
+                info : value
+            }
         });
     }
 
     onChangeUrl = (value) =>{
         this.setState({
-            url : value
+            project : {
+                ...this.state.project,
+                url : value
+            }
         });
     }
 
     onChangeImgUrl = (value) =>{
         this.setState({
-            imgUrl : value
+            project : {
+                ...this.state.project,
+                imgUrl : value
+            }
         });
     }
 
     onSubmit = () =>{
-        this.fetchSubmit();
-        this.setState(this.baseState);
-    }
-
-    fetchSubmit = () =>{
-        fetch("http://localhost:8000/addProject",{
-            method : 'POST',
-            headers : {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body : JSON.stringify({
-                title : this.state.title,
-                info : this.state.info,
-                url : this.state.url,
-                imgUrl : this.state.imgUrl
-            })
-        }).then((res)=>{
-            return res.json();
-        }).then((blog)=>{
-            console.log(blog);
-        }).catch((err)=>{
-            console.log(err)
-        })
+        this.props.submitHandler(this.state.project);
+        this.setState({project : this.baseState});
     }
 
     render(){

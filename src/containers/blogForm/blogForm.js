@@ -1,7 +1,7 @@
 import React from 'react';
-import './addBlog.css';
+import './blogForm.css';
 
-class AddBlog extends React.Component{
+class BlogForm extends React.Component{
     constructor(props){
         super(props);
         this.state = {
@@ -36,26 +36,6 @@ class AddBlog extends React.Component{
         this.setState(this.baseState);
     }
 
-    fetchSubmit = () =>{
-        fetch("http://localhost:8000/postBlog",{
-            method : 'PUT',
-            headers : {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body : JSON.stringify({
-                title : this.state.blog.title,
-                content : this.state.blog.content
-            })
-        }).then((res)=>{
-            return res.json();
-        }).then((blog)=>{
-            console.log(blog);
-        }).catch((err)=>{
-            console.log(err)
-        })
-    }
-
     render(){
         return(
             <main className="addBlogPage">
@@ -65,10 +45,10 @@ class AddBlog extends React.Component{
                 <textarea  onChange={this.contentEventHandler} 
                     placeholder="content" value={this.state.blog.content}>
                 </textarea>
-                <button onClick={this.submitBlogHandler}>SUBMIT</button>
+                <button onClick={()=>this.props.submitHandler(this.state.blog)}>SUBMIT</button>
             </main>
         );
     }
 }
 
-export default AddBlog;
+export default BlogForm;
