@@ -1,4 +1,5 @@
 import React from 'react';
+import {withRouter} from 'react-router-dom'
 import Card from '../../UI/card/card';
 
 import './blogsPage.css';
@@ -6,7 +7,7 @@ import './blogsPage.css';
 const blogs = (props) =>{
 
     const editHandler = () =>{
-        console.log('edit project');
+        props.history.push('/editBlog');
     }
 
     const deleteHandler = (index) =>{
@@ -43,4 +44,4 @@ const blogs = (props) =>{
     );
 }
 
-export default blogs;
+export default withRouter(blogs);

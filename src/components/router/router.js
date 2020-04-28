@@ -5,6 +5,7 @@ import AddBlog from '../blogForms/addBlog';
 import AddProject from '../projectForms/addProject';
 import Blogs from '../layout/blogs/blogs';
 import Projects from '../layout/projects/projects';
+import EditBlog from '../blogForms/editBlog';
 
 const router = () =>{
     return(
@@ -14,6 +15,7 @@ const router = () =>{
             <Route path="/addProject" component={AddProject}/>
             <Route path="/blogs" component={Blogs}/>
             <Route path="/projects" component={Projects}/>
+            <Route path="/editBlog" component={EditBlog}/>
         </Switch>
     );
 }

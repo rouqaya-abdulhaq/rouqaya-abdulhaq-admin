@@ -13,6 +13,12 @@ class BlogForm extends React.Component{
         this.baseState = this.state;
     }
 
+    componentDidUpdate(prevProps, prevState){
+        if(prevProps.blog !== this.props.blog){
+            this.setState({blog : this.props.blog});
+        }
+    }
+
     titleEventHandler = (event) =>{
         this.setState({
             blog :  {
