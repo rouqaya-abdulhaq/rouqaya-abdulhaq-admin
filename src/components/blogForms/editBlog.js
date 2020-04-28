@@ -1,12 +1,17 @@
 import React ,{useState, useEffect} from 'react';
+import queryString from 'querystring';
+import {withRouter} from 'react-router-dom';
 import BlogForm from '../../containers/blogForm/blogForm';
 
 const EditBlog = (props) =>{
 
     const [blogToEdit , setBlog] = useState(null);
 
+    const values = queryString.parse(props.location.search.slice(1));
+    const title = values.blogTitle;
+
     useEffect(()=>{ 
-        fetch(`http://localhost:8000/loadBlog?blogTitle=blog1`,{
+        fetch(`http://localhost:8000/loadBlog?blogTitle=${title}`,{
             method : 'GET',
             headers : {
                 'Accept': 'application/json',
@@ -19,11 +24,11 @@ const EditBlog = (props) =>{
         }).catch((err)=>{
             console.log(err);
         });
-    },[]);
+    },[title]);
 
     const fetchEdit = (blog) =>{
         console.log(blog);
-        fetch("http://localhost:8000/editBlog?blogTitle=blog1",{
+        fetch(`http://localhost:8000/editBlog?blogTitle=${title}`,{
             method : 'PUT',
             headers : {
                 'Accept': 'application/json',
@@ -50,4 +55,4 @@ const EditBlog = (props) =>{
     );
 }
 
-export default EditBlog;
+export default withRouter(EditBlog);
