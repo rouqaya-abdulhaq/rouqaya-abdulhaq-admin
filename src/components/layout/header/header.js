@@ -5,12 +5,10 @@ import './header.css';
 const header = (props) =>{
 
     const blogsLinks = [{value : "add blog",path : "/addBlog"},
-                        {value : "remove blog",path : "/blogs"},
-                        {value : "edit blog",path:"/blogs"}];
+                        {value : "view blogs",path : "/blogs"},];
 
     const projectsLinks = [{value : "add project",path : "/addProject"},
-                            {value : "remove project", path : "/projects"},
-                            {value : "edit project", path : "/projects"}];
+                            {value : "view projects", path : "/projects"},];
 
     return(
         <header>

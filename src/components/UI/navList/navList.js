@@ -7,8 +7,8 @@ const NavList = (props) =>{
 
     const navItems = props.links.map((link)=>{
         return(
-            <Link to={link.path}>
-                <li onClick={()=>setHidden(true)}>{link.value}</li>
+            <Link to={link.path} key={link.value}>
+                <li onClick={()=>setHidden(true)} >{link.value}</li>
             </Link>
         );
     });
