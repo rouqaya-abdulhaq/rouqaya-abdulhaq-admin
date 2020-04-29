@@ -1,5 +1,7 @@
 import React from 'react';
+import {withRouter} from 'react-router-dom'
 import './blogForm.css';
+
 
 class BlogForm extends React.Component{
     constructor(props){
@@ -46,10 +48,10 @@ class BlogForm extends React.Component{
         return(
             <main className="addBlogPage">
                 <input className="title" onChange={this.titleEventHandler} 
-                    placeholder="title" value={this.state.blog.title}>
+                    placeholder="title" value={this.state.blog.title || ''}>
                 </input>
                 <textarea  onChange={this.contentEventHandler} 
-                    placeholder="content" value={this.state.blog.content}>
+                    placeholder="content" value={this.state.blog.content || ''}>
                 </textarea>
                 <button onClick={()=>this.props.submitHandler(this.state.blog)}>SUBMIT</button>
             </main>
@@ -57,4 +59,4 @@ class BlogForm extends React.Component{
     }
 }
 
-export default BlogForm;
+export default withRouter(BlogForm);
