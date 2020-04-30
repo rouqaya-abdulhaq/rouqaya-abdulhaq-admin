@@ -15,10 +15,34 @@ class BlogForm extends React.Component{
         this.baseState = this.state;
     }
 
-    componentDidUpdate(prevProps, prevState){
-        if(prevProps.blog !== this.props.blog){
-            this.setState({blog : this.props.blog});
+    componentDidMount(){
+        this.loadBlog();
+    }
+
+    shouldComponentUpdate(nextProps,nextState){
+        if(nextState === this.state){
+            return false;
+        }else{
+            return true;
         }
+    }
+
+    loadBlog = () =>{
+       if(this.props.title){
+        fetch(`http://localhost:8000/loadBlog?blogTitle=${this.props.title}`,{
+            method : 'GET',
+            headers : {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+        }).then((res)=>{
+            return res.json();
+        }).then((blog)=>{
+            this.setState({blog : blog});
+        }).catch((err)=>{
+            console.log(err);
+        });
+       } 
     }
 
     titleEventHandler = (event) =>{
@@ -40,8 +64,9 @@ class BlogForm extends React.Component{
     }
 
     submitBlogHandler = () =>{
-        this.fetchSubmit();
+        this.props.submitHandler(this.state.blog);
         this.setState(this.baseState);
+        this.props.history.push('/blogs');
     }
 
     render(){
@@ -53,7 +78,7 @@ class BlogForm extends React.Component{
                 <textarea  onChange={this.contentEventHandler} 
                     placeholder="content" value={this.state.blog.content || ''}>
                 </textarea>
-                <button onClick={()=>this.props.submitHandler(this.state.blog)}>SUBMIT</button>
+                <button onClick={this.submitBlogHandler}>SUBMIT</button>
             </main>
         );
     }
