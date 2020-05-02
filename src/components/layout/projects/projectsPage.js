@@ -1,12 +1,13 @@
 import React from 'react';
 import Card from '../../UI/card/card';
+import { withRouter } from 'react-router-dom';
 
 import './projectsPage.css';
 
 const projectsPage = (props) =>{
 
-    const editHandler = () =>{
-        console.log('edit project');
+    const editHandler = (projectTitle) =>{
+        props.history.push(`/editProject?projectTitle=${projectTitle}`);
     }
 
     const deleteHandler = (index) =>{
@@ -31,7 +32,7 @@ const projectsPage = (props) =>{
     const projects = props.serverData ? props.serverData.map((projectData,index)=>{
         return <Card title={projectData.title} info={projectData.info}
         url={projectData.url} githubUrl={projectData.githubUrl}
-        editHandler={editHandler}
+        editHandler={()=>editHandler(projectData.title)}
         deleteHandler={deleteHandler}
         index = {index} 
         key={projectData.title}/>
@@ -44,4 +45,4 @@ const projectsPage = (props) =>{
     );
 }
 
-export default projectsPage;
+export default withRouter(projectsPage);

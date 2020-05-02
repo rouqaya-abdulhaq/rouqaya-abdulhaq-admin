@@ -1,7 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import './projectForm.css';
-import projects from '../../components/layout/projects/projects';
 
 class AddProject extends React.Component{
 
@@ -32,7 +31,7 @@ class AddProject extends React.Component{
 
     loadProject = () =>{
         if(this.props.title){
-         fetch(`http://localhost:8000/loadProject?ProjectTitle=${this.props.title}`,{
+         fetch(`http://localhost:8000/loadProject?projectTitle=${this.props.title}`,{
              method : 'GET',
              headers : {
                  'Accept': 'application/json',
@@ -95,16 +94,16 @@ class AddProject extends React.Component{
             <main>
                 <form>
                     <input placeholder="title" onChange={(event)=>this.onChangeTitle(event.target.value)}
-                        value={this.state.title}>
+                        value={this.state.project.title || ""}>
                     </input>
                     <input placeholder="url" onChange={(event)=>this.onChangeUrl(event.target.value)}
-                        value={this.state.url}>
+                        value={this.state.project.url || ""}>
                     </input>
                     <input placeholder="img url" onChange={(event)=>this.onChangeImgUrl(event.target.value)}
-                        value={this.state.imgUrl}>
+                        value={this.state.project.imgUrl || ""}>
                     </input>
                     <textarea placeholder="info" onChange={(event)=>this.onChangeInfo(event.target.value)}
-                        value={this.state.info}>
+                        value={this.state.project.info || ""}>
                     </textarea>
                     <button type="button" onClick={this.onSubmit}>submit</button>
                 </form>
