@@ -1,5 +1,7 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 import './projectForm.css';
+import projects from '../../components/layout/projects/projects';
 
 class AddProject extends React.Component{
 
@@ -15,6 +17,36 @@ class AddProject extends React.Component{
         }
         this.baseState = {...this.state.project};
     }
+
+    componentDidMount(){
+        this.loadProject();
+    }
+
+    shouldComponentUpdate(nextProps,nextState){
+        if(nextState === this.state){
+            return false;
+        }else{
+            return true;
+        }
+    }
+
+    loadProject = () =>{
+        if(this.props.title){
+         fetch(`http://localhost:8000/loadProject?ProjectTitle=${this.props.title}`,{
+             method : 'GET',
+             headers : {
+                 'Accept': 'application/json',
+                 'Content-Type': 'application/json'
+             },
+         }).then((res)=>{
+             return res.json();
+         }).then((project)=>{
+             this.setState({project : project});
+         }).catch((err)=>{
+             console.log(err);
+         });
+        } 
+     }
 
     onChangeTitle = (value) =>{
         this.setState({
@@ -55,6 +87,7 @@ class AddProject extends React.Component{
     onSubmit = () =>{
         this.props.submitHandler(this.state.project);
         this.setState({project : this.baseState});
+        this.props.history.push('/projects');
     }
 
     render(){
@@ -80,4 +113,4 @@ class AddProject extends React.Component{
     }
 }
 
-export default AddProject;
+export default withRouter(AddProject);
