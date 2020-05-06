@@ -11,7 +11,7 @@ class AddProject extends React.Component{
                 title : "",
                 info : "",
                 url : "",
-                imgUrl : ""
+                img : null
             }
         }
         this.baseState = {...this.state.project};
@@ -74,13 +74,14 @@ class AddProject extends React.Component{
         });
     }
 
-    onChangeImgUrl = (value) =>{
+    onChangeImgUrl = (file) =>{
         this.setState({
             project : {
                 ...this.state.project,
-                imgUrl : value
+                img : file
             }
         });
+        console.log(file);
     }
 
     onSubmit = () =>{
@@ -100,7 +101,9 @@ class AddProject extends React.Component{
                         value={this.state.project.url || ""}>
                     </input>
                     <input type="file" accept="image/x-png,image/gif,image/jpeg" id="img"
-                        onChange={(event)=>this.onChangeImgUrl(event.target.value)}
+                        onChange={(event)=>{
+                            this.onChangeImgUrl(event.target.files[0]);
+                        }}
                         value={this.state.project.imgUrl || ""}>
                     </input>
                     <label htmlFor="img">upload an img</label>

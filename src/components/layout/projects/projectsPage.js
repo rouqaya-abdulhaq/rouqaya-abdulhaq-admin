@@ -31,7 +31,7 @@ const projectsPage = (props) =>{
 
     const projects = props.serverData ? props.serverData.map((projectData,index)=>{
         return <Card title={projectData.title} info={projectData.info}
-        url={projectData.url} githubUrl={projectData.githubUrl}
+        url={projectData.url} githubUrl={projectData.githubUrl} imgPath={projectData.imgUrl}
         editHandler={()=>editHandler(projectData.title)}
         deleteHandler={deleteHandler}
         index = {index} 

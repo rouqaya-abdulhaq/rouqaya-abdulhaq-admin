@@ -14,7 +14,6 @@ const addProject = () =>{
                 title : project.title,
                 info : project.info,
                 url : project.url,
-                imgUrl : project.imgUrl
             })
         }).then((res)=>{
             return res.json();
@@ -23,7 +22,22 @@ const addProject = () =>{
         }).catch((err)=>{
             console.log(err)
         })
+        // uploadImg(project.img)
     }
+
+    // const uploadImg = (img) =>{
+    //     const fromData = new FormData();
+    //     fromData.append('file',img);
+    //     fetch("http://localhost:8000/uploadImg",{
+    //         method : 'POST',
+    //         headers : {
+    //             'content-type': 'multipart/form-data'
+    //         },
+    //         body : fromData
+    //     }).then((res) =>{
+    //         console.log(res);
+    //     })
+    // }
 
     return(
         <ProjectForm submitHandler={fetchSubmit}/> 
