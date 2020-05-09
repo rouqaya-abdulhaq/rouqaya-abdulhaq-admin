@@ -22,22 +22,19 @@ const addProject = () =>{
         }).catch((err)=>{
             console.log(err)
         })
-        // uploadImg(project.img)
+        uploadImg(project.img);
     }
 
-    // const uploadImg = (img) =>{
-    //     const fromData = new FormData();
-    //     fromData.append('file',img);
-    //     fetch("http://localhost:8000/uploadImg",{
-    //         method : 'POST',
-    //         headers : {
-    //             'content-type': 'multipart/form-data'
-    //         },
-    //         body : fromData
-    //     }).then((res) =>{
-    //         console.log(res);
-    //     })
-    // }
+    const uploadImg = (img) =>{
+        const formData = new FormData();
+        formData.append('img',img);
+        fetch("http://localhost:8000/uploadImg",{
+            method : 'POST',
+            body : formData
+        }).then((res) =>{
+            console.log(res);
+        })
+    }
 
     return(
         <ProjectForm submitHandler={fetchSubmit}/> 
