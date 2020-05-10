@@ -11,6 +11,7 @@ class AddProject extends React.Component{
                 title : "",
                 info : "",
                 url : "",
+                imgUrl : "",
                 img : null
             }
         }
@@ -82,7 +83,7 @@ class AddProject extends React.Component{
             }
         });
     }
-
+    
     onSubmit = () =>{
         this.props.submitHandler(this.state.project);
         this.setState({project : this.baseState});

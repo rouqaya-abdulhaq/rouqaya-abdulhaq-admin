@@ -8,8 +8,7 @@ const card = (props) =>{
     const page = props.page ? <Link to={props.page}>view blog</Link> : null;
     const website = props.url ? <a href={props.url}>url</a> : null;
     const githubPage = props.githubUrl ? <a href={props.githubUrl}>github scource</a> : null;
-    //temp until i upload the image to the server
-    // const img = props.imgPath ? <img src={props.imgPath} alt="project img"/> : null;
+    const img = props.imgPath ? <p>{props.imgPath}</p> : null;
     
     return(
         <section>
@@ -18,7 +17,7 @@ const card = (props) =>{
             {website}
             {githubPage}
             {page}
-            {/* {img} */}
+            {img}
 
             <button onClick={props.editHandler}>edit</button>
             <button onClick={()=>props.deleteHandler(props.index)}>delete</button>

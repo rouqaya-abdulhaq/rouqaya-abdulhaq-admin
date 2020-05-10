@@ -22,17 +22,22 @@ const addProject = () =>{
         }).catch((err)=>{
             console.log(err)
         })
-        uploadImg(project.img);
+        uploadImg(project.img,project.title);
     }
 
-    const uploadImg = (img) =>{
+    const uploadImg = (img,title) =>{
         const formData = new FormData();
         formData.append('img',img);
-        fetch("http://localhost:8000/uploadImg",{
+        fetch(`http://localhost:8000/uploadImg?title=${title}`,{
             method : 'POST',
+            headers : {
+                'Accept': 'application/json',
+            },
             body : formData
         }).then((res) =>{
-            console.log(res);
+           console.log(res);
+        }).catch((err)=>{
+            console.log(err);
         })
     }
 
