@@ -12,7 +12,7 @@ class AddProject extends React.Component{
                 info : "",
                 url : "",
                 imgUrl : "",
-                img : null
+                img : "",
             }
         }
         this.baseState = {...this.state.project};
@@ -104,8 +104,7 @@ class AddProject extends React.Component{
                         name="img" id="img"
                         onChange={(event)=>{
                             this.onChangeImgUrl(event.target.files[0]);
-                        }}
-                        value={this.state.project.imgUrl || ""}>
+                        }}>
                     </input>
                     <label htmlFor="img">upload an img</label>
                     <textarea placeholder="info" onChange={(event)=>this.onChangeInfo(event.target.value)}

@@ -8,7 +8,9 @@ const EditProject = (props) =>{
     const values = queryString.parse(props.location.search.slice(1));
     const title = values.projectTitle;
     
-    const fetchEdit = (project) =>{
+    async function fetchEdit  (project) {
+        uploadImg(project.img,project.title);
+        const imgUrl = await getImgPath(project.img.name.toString());
         fetch(`http://localhost:8000/editProject?projectTitle=${title}`,{
             method : 'PUT',
             headers : {
@@ -20,7 +22,7 @@ const EditProject = (props) =>{
                     title : project.title,
                     info : project.info,
                     url : project.url,
-                    imgUrl : project.imgUrl
+                    imgUrl : imgUrl
                 }
             })
         }).then((res)=>{
@@ -30,6 +32,32 @@ const EditProject = (props) =>{
             return project;
         }).catch((err)=>{
             console.log(err)
+        })
+    }
+
+    async function getImgPath(imgName){
+        fetch(`http://localhost:8000/getImg?filePath=${imgName}`,{
+            method : 'GET',
+        }).then((res) =>{
+            return res
+        }).catch((err) =>{
+            console.log(err);
+        })
+    }
+
+    const uploadImg = (img,title) =>{
+        const formData = new FormData();
+        formData.append('img',img);
+        fetch(`http://localhost:8000/uploadImg?title=${title}`,{
+            method : 'POST',
+            headers : {
+                'Accept': 'application/json',
+            },
+            body : formData
+        }).then((res) =>{
+           console.log(res);
+        }).catch((err)=>{
+            console.log(err);
         })
     }
 
