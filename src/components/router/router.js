@@ -4,7 +4,7 @@ import LandingPage from '../layout/landingPage/landingPage';
 import AddBlog from '../blogForms/addBlog';
 import AddProject from '../projectForms/addProject';
 import Blogs from '../layout/blogs/blogs';
-import Projects from '../layout/projects/projects';
+import Projects from '../../containers/projects/projectsPage';
 import EditBlog from '../blogForms/editBlog';
 import EditProject from '../projectForms/editProject';
 

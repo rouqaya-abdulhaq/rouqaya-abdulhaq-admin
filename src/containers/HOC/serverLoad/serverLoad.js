@@ -25,6 +25,7 @@ class ServerLoad extends React.Component{
         }).then((res)=>{
             return res.json();
         }).then((data)=>{
+            console.log(data);
             this.setState({serverData : data});
         }).catch((err)=>{
             console.log(err)
@@ -33,6 +34,7 @@ class ServerLoad extends React.Component{
 
 
     render(){
+        // console.log(this.state.serverData);
         const children = React.Children.map(this.props.children, child =>{
             return React.cloneElement(child, {
                 serverData : this.state.serverData,

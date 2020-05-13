@@ -4,13 +4,13 @@ import {withRouter} from 'react-router-dom';
 import ProjectForm from '../../containers/projectForm/projectForm';
 
 const EditProject = (props) =>{
-
+    
     const values = queryString.parse(props.location.search.slice(1));
     const title = values.projectTitle;
-    
+    console.log(title);
     async function fetchEdit  (project) {
         uploadImg(project.img,project.title);
-        const imgUrl = await getImgPath(project.img.name.toString());
+
         fetch(`http://localhost:8000/editProject?projectTitle=${title}`,{
             method : 'PUT',
             headers : {
@@ -22,26 +22,16 @@ const EditProject = (props) =>{
                     title : project.title,
                     info : project.info,
                     url : project.url,
-                    imgUrl : imgUrl
+                    imgUrl : 'C:\\Users\\acer\\Desktop\\projects\\rouqaya-server\\' + project.img.name
                 }
             })
         }).then((res)=>{
             return res.json();
-        }).then((project)=>{
-            console.log(project);
-            return project;
+        }).then((projects)=>{
+            // console.log(projects);
+            // props.loaction.state.updatedState("projects",projects);
         }).catch((err)=>{
             console.log(err)
-        })
-    }
-
-    async function getImgPath(imgName){
-        fetch(`http://localhost:8000/getImg?filePath=${imgName}`,{
-            method : 'GET',
-        }).then((res) =>{
-            return res
-        }).catch((err) =>{
-            console.log(err);
         })
     }
 

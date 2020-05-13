@@ -24,7 +24,6 @@ const EditBlog = (props) =>{
         }).then((res)=>{
             return res.json();
         }).then((blog)=>{
-            console.log(blog);
             return blog;
         }).catch((err)=>{
             console.log(err)
