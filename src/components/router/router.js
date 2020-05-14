@@ -3,7 +3,7 @@ import {Switch, Route} from 'react-router-dom';
 import LandingPage from '../layout/landingPage/landingPage';
 import AddBlog from '../blogForms/addBlog';
 import AddProject from '../projectForms/addProject';
-import Blogs from '../layout/blogs/blogs';
+import Blogs from '../../containers/blogs/blogsPage';
 import Projects from '../../containers/projects/projectsPage';
 import EditBlog from '../blogForms/editBlog';
 import EditProject from '../projectForms/editProject';

@@ -1,7 +1,7 @@
 import React from 'react';
 import queryString from 'querystring';
 import {withRouter} from 'react-router-dom';
-import BlogForm from '../../containers/blogForm/blogForm';
+import BlogForm from '../../containers/blogs/blogForm/blogForm';
 
 const EditBlog = (props) =>{
 

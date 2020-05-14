@@ -1,7 +1,7 @@
 import React from 'react';
 import queryString from 'querystring';
 import {withRouter} from 'react-router-dom';
-import ProjectForm from '../../containers/projectForm/projectForm';
+import ProjectForm from '../../containers/projects/projectForm/projectForm';
 
 const EditProject = (props) =>{
     
