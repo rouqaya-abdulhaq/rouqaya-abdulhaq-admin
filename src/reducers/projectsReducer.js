@@ -1,13 +1,26 @@
 import * as actionTypes from '../actions/actionTypes';
 
-const reducer = (state = {}, action) =>{
+const reducer = (state = [], action) =>{
     switch(action.type){
         case actionTypes.ADD_PROJECT :
-            return {...state, project : action.project}
+            const {newProject} = action.payload; 
+            return [...state, newProject]
+
         case actionTypes.EDIT_PROJECT :
-            return {...state, project : action.project}
+            const {projetId,editedProject} = action.payload;
+            return state.map((project)=>{
+                if(project.id === projetId){
+                    project = {...editedProject};
+                }
+                return project;
+            });
+
         case actionTypes.DELETE_PROJECT :
-            return {...state, project : action.project}
+            const {projectId} = action.payload; 
+            return state.filter((project)=>{
+                return project.id !== projectId;
+            });
+
         default : 
             return state;
     }

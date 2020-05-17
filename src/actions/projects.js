@@ -3,21 +3,27 @@ import * as actionTypes from './actionTypes';
 export const addProject = (project) =>{
    return {
     type : actionTypes.ADD_PROJECT,
-    project : project
+    payload : {
+        newProject : project
+    }
    } 
 }
 
-export const editProject = (project,title) =>{
+export const editProject = (project,id) =>{
     return {
         type : actionTypes.EDIT_PROJECT,
-        project : project,
-        title : title
+        payload : {
+            projectId : id,
+            editedProject : project
+        }
     } 
 }
 
-export const deleteProject = (title) =>{
+export const deleteProject = (id) =>{
     return {
         type : actionTypes.DELETE_PROJECT,
-        title : title
+        payload : {
+            projectId : id
+        }
     } 
 }
