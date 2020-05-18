@@ -9,11 +9,11 @@ export const addProjectToState = (project) =>{
    } 
 }
 
-export const editProject = (project,id) =>{
+export const editProjectInState = (project,id) =>{
     return {
         type : actionTypes.EDIT_PROJECT,
         payload : {
-            projectId : id,
+            eidtProjectId : id,
             editedProject : project
         }
     } 

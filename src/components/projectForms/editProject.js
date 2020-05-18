@@ -1,6 +1,8 @@
 import React from 'react';
 import queryString from 'querystring';
 import {withRouter} from 'react-router-dom';
+import {connect} from 'react-redux';
+import {editProjectInState} from '../../actions/projects';
 import ProjectForm from '../../containers/projects/projectForm/projectForm';
 
 const EditProject = (props) =>{
@@ -22,8 +24,9 @@ const EditProject = (props) =>{
             body : formData
         }).then((res)=>{
             return res.json();
-        }).then((projects)=>{
-            console.log(projects);
+        }).then((project)=>{
+            //hard coding id for now
+            props.editProjectInState(project,2);
         }).catch((err)=>{
             console.log(err)
         })
@@ -34,4 +37,10 @@ const EditProject = (props) =>{
     );
 }
 
-export default withRouter(EditProject);
+const mapDispatchToProps = (dispatch) =>{
+    return{
+        editProjectInState : (project,projectId) => dispatch(editProjectInState(project,projectId))
+    }
+}
+
+export default connect(null,mapDispatchToProps)(withRouter(EditProject));
