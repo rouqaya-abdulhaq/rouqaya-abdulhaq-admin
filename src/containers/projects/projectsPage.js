@@ -28,7 +28,7 @@ class projectsPage extends React.Component {
             return res.json();
         }).then((projectsData)=>{
             this.setState({projects : projectsData});
-            console.log(this.state.projects);
+            // console.log(this.state.projects);
         }).catch((err)=>{
             console.log(err)
         })

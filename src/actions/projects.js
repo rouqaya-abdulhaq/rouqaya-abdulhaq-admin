@@ -1,6 +1,6 @@
 import * as actionTypes from './actionTypes';
 
-export const addProject = (project) =>{
+export const addProjectToState = (project) =>{
    return {
     type : actionTypes.ADD_PROJECT,
     payload : {

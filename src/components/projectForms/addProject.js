@@ -1,9 +1,12 @@
 import React from 'react';
+import {connect} from 'react-redux';
+import {addProjectToState} from '../../actions/projects';
 import ProjectForm from '../../containers/projects/projectForm/projectForm';
 
-const addProject = () =>{
+const addProject = (props) =>{
 
     const fetchSubmit = (project) =>{
+        //add an id to the project in DB 
         const formData = new FormData();
         formData.append('img',project.img);
         formData.append('title',project.title);
@@ -18,7 +21,7 @@ const addProject = () =>{
         }).then((res)=>{
             return res.json();
         }).then((project)=>{
-            console.log(project);
+            props.addProjectToState(project);
         }).catch((err)=>{
             console.log(err)
         })
@@ -29,4 +32,10 @@ const addProject = () =>{
     );
 }
 
-export default addProject;
+const mapDispatchToProps = (dispatch) =>{
+    return{
+        addProjectToState : (project) => {dispatch(addProjectToState(project))}
+    }
+}
+
+export default connect(null,mapDispatchToProps)(addProject);
