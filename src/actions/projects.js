@@ -19,7 +19,7 @@ export const editProjectInState = (project,id) =>{
     } 
 }
 
-export const deleteProject = (id) =>{
+export const deleteProjectFromState = (id) =>{
     return {
         type : actionTypes.DELETE_PROJECT,
         payload : {

@@ -1,4 +1,6 @@
 import React from 'react';
+import {connect} from 'react-redux';
+import {deleteProjectFromState} from '../../actions/projects';
 import Card from '../../components/UI/card/card';
 import { withRouter } from 'react-router-dom';
 
@@ -57,6 +59,8 @@ class projectsPage extends React.Component {
             }).then((res)=>{
                 return res.json();
             }).then((res)=>{
+                //hard code id for now only
+                this.props.deleteProjectFromState(1);
                 this.setState({projects : res});
             }).catch((err)=>{
                 console.log(err);
@@ -84,4 +88,10 @@ class projectsPage extends React.Component {
     }
 }
 
-export default withRouter(projectsPage);
+const mapDispatchToProps = (dispatch) =>{
+    return {
+        deleteProjectFromState : (id) => dispatch(deleteProjectFromState(id))
+    }
+}
+
+export default connect(null,mapDispatchToProps)(withRouter(projectsPage));
