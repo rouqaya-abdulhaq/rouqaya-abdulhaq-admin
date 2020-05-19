@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {deleteProjectFromState} from '../../actions/projects';
+import {deleteProjectFromState,loadProjects} from '../../actions/projects';
 import Card from '../../components/UI/card/card';
 import { withRouter } from 'react-router-dom';
 
@@ -11,29 +11,12 @@ class projectsPage extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            projects : [],
             loadCount : 0
         }
     }
 
     componentDidMount(){
-        this.loadProjects();
-    }
-
-    loadProjects = () =>{
-        fetch(`http://localhost:8000/loadProjects?loadCount=${this.state.loadCount}`,{
-            method : 'GET',
-            headers : {
-                'Accept' : 'application/json',
-            }
-        }).then((res)=>{
-            return res.json();
-        }).then((projectsData)=>{
-            this.setState({projects : projectsData});
-            // console.log(this.state.projects);
-        }).catch((err)=>{
-            console.log(err)
-        })
+        this.props.loadProjects(this.state.loadCount);
     }
 
     editHandler = (projectTitle) =>{
@@ -61,7 +44,6 @@ class projectsPage extends React.Component {
             }).then((res)=>{
                 //hard code id for now only
                 this.props.deleteProjectFromState(1);
-                this.setState({projects : res});
             }).catch((err)=>{
                 console.log(err);
             });
@@ -70,8 +52,7 @@ class projectsPage extends React.Component {
     
     
     render(){
-
-        const projects = this.state.projects ? this.state.projects.map((projectData,index)=>{
+        const projects = this.props.projects ? this.props.projects.map((projectData,index)=>{
             return <Card title={projectData.title} info={projectData.info}
             url={projectData.url} githubUrl={projectData.githubUrl} imgPath={projectData.imgUrl}
             editHandler={()=>this.editHandler(projectData.title)}
@@ -88,10 +69,17 @@ class projectsPage extends React.Component {
     }
 }
 
-const mapDispatchToProps = (dispatch) =>{
+const mapStateToProps = (state) =>{
     return {
-        deleteProjectFromState : (id) => dispatch(deleteProjectFromState(id))
+        projects : state.projects
     }
 }
 
-export default connect(null,mapDispatchToProps)(withRouter(projectsPage));
+const mapDispatchToProps = (dispatch) =>{
+    return {
+        deleteProjectFromState : (id) => dispatch(deleteProjectFromState(id)),
+        loadProjects : (loadCount) => dispatch(loadProjects(loadCount))
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(withRouter(projectsPage));

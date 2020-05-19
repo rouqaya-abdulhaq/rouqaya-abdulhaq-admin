@@ -1,32 +1,64 @@
 import * as actionTypes from '../actions/actionTypes';
 
-const reducer = (state = [{id : 1},{id:2},{id:3}], action) =>{
-    console.log(action.type);
+const initialState = {
+    projects : [],
+    loading : false,
+    err : null
+}
+
+const reducer = (state = initialState, action) =>{
     switch(action.type){
         case actionTypes.ADD_PROJECT :
             const {newProject} = action.payload;
-            return [...state, newProject]
+            return {
+                ...state,
+                projects : [...state.projects, newProject]}
 
         case actionTypes.EDIT_PROJECT :
             const {eidtProjectId,editedProject} = action.payload;
-            const newarr = state.map((project)=>{
+            const newarr = state.projects.map((project)=>{
                 if(project.id === eidtProjectId){
                     project = {...editedProject};
                 }
                 return project;
             });
-            return newarr;
+            return {
+                ...state,
+                projects : newarr};
 
         case actionTypes.DELETE_PROJECT :
             const {projectId} = action.payload; 
-            const arr =  state.filter((project)=>{
+            const arr =  state.projects.filter((project)=>{
                 return project.id !== projectId;
             });
-            console.log(arr);
-            return arr;
+            return {
+                ...state,
+                projects : arr};
+
+        case actionTypes.LOAD_PROJECTS_START :
+            return {
+                ...state,
+                loading : true
+            }
+
+        case actionTypes.LOAD_PROJECTS_SUCCESS :
+            const {projects} = action.payload;
+            return {
+                ...state,
+                loading : false,
+                err : null,
+                projects : projects
+            }
+        
+        case actionTypes.LOAD_PROJECTS_FAIL :
+            const {err} = action.payload;
+            return {
+                ...state,
+                loading : false,
+                err : err
+            }
 
         default : 
-            console.log("d");
             return state;
     }
 }
