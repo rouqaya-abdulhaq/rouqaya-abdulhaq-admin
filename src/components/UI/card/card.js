@@ -20,7 +20,7 @@ const card = (props) =>{
             {img}
 
             <button onClick={props.editHandler}>edit</button>
-            <button onClick={()=>props.deleteHandler(props.index)}>delete</button>
+            <button onClick={props.deleteHandler}>delete</button>
         </section>
     );
 }

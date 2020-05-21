@@ -13,7 +13,7 @@ export const editProjectInState = (project,id) =>{
     return {
         type : actionTypes.EDIT_PROJECT,
         payload : {
-            eidtProjectId : id,
+            editProjectId : id,
             editedProject : project
         }
     } 

@@ -9,13 +9,16 @@ const EditProject = (props) =>{
     
     const values = queryString.parse(props.location.search.slice(1));
     const title = values.projectTitle;
+    const id = values.projectId;
 
     async function fetchEdit  (project) {
+        // console.log(id);
         const formData = new FormData();
         formData.append('img',project.img);
         formData.append('title',project.title);
         formData.append('info',project.info);
         formData.append('url',project.url);
+        formData.append('id',id);
         fetch(`http://localhost:8000/editProject?projectTitle=${title}`,{
             method : 'PUT',
             headers : {
@@ -26,7 +29,7 @@ const EditProject = (props) =>{
             return res.json();
         }).then((project)=>{
             //hard coding id for now
-            props.editProjectInState(project,2);
+            props.editProjectInState(project,id);
         }).catch((err)=>{
             console.log(err)
         })

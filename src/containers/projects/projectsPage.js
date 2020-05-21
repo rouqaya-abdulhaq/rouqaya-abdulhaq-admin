@@ -19,17 +19,17 @@ class projectsPage extends React.Component {
         this.props.loadProjects(this.state.loadCount);
     }
 
-    editHandler = (projectTitle) =>{
+    editHandler = (projectTitle,projectId) =>{
         this.props.history.push({
            pathname :  '/editProject',
-           search : `?projectTitle=${projectTitle}`,});
+           search : `?projectTitle=${projectTitle}&projectId=${projectId}`,});
     }
 
     updateState = (oldStateName , newState) =>{
         this.setState({[oldStateName] : newState})
     }
 
-    deleteHandler = (index) =>{
+    deleteHandler = (index,id) =>{
         fetch('http://localhost:8000/removeProject',{
             method : 'DELETE',
             headers : {
@@ -42,8 +42,9 @@ class projectsPage extends React.Component {
             }).then((res)=>{
                 return res.json();
             }).then((res)=>{
-                //hard code id for now only
-                this.props.deleteProjectFromState(1);
+                if(res){
+                    this.props.deleteProjectFromState(id);
+                }
             }).catch((err)=>{
                 console.log(err);
             });
@@ -53,10 +54,11 @@ class projectsPage extends React.Component {
     
     render(){
         const projects = this.props.projects ? this.props.projects.map((projectData,index)=>{
+            // console.log(projectData);
             return <Card title={projectData.title} info={projectData.info}
             url={projectData.url} githubUrl={projectData.githubUrl} imgPath={projectData.imgUrl}
-            editHandler={()=>this.editHandler(projectData.title)}
-            deleteHandler={this.deleteHandler}
+            editHandler={()=>this.editHandler(projectData.title,projectData.id)}
+            deleteHandler={()=>this.deleteHandler(index,projectData.id)}
             index = {index} 
             key={projectData.title}/>
         }) : "no projects to display";
