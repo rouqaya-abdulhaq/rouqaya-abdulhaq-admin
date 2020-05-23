@@ -1,11 +1,7 @@
 import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
-    blogs : [{id : 1,title : "blog1" , content : "words"},
-    {id:2,title : "blog2" , content : "words"},
-    {id: 3,title : "blog3" , content : "words"},
-    {id:4,title : "blog4" , content : "words"},
-    {id:5,title : "blog5" , content : "words"}],
+    blogs : [],
     loading : false,
     err : null
 }

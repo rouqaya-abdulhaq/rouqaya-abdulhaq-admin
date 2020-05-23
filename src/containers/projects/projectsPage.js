@@ -40,8 +40,6 @@ class projectsPage extends React.Component {
                 index : index
             })
             }).then((res)=>{
-                return res.json();
-            }).then((res)=>{
                 if(res){
                     this.props.deleteProjectFromState(id);
                 }
@@ -54,7 +52,6 @@ class projectsPage extends React.Component {
     
     render(){
         const projects = this.props.projects ? this.props.projects.map((projectData,index)=>{
-            // console.log(projectData);
             return <Card title={projectData.title} info={projectData.info}
             url={projectData.url} githubUrl={projectData.githubUrl} imgPath={projectData.imgUrl}
             editHandler={()=>this.editHandler(projectData.title,projectData.id)}

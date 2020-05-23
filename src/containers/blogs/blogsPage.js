@@ -1,7 +1,7 @@
 import React from 'react';
 import {withRouter} from 'react-router-dom';
 import { connect} from 'react-redux';
-import {deleteBlogFromState} from '../../actions/blogs';
+import {deleteBlogFromState ,loadBlogs} from '../../actions/blogs';
 import Card from '../../components/UI/card/card';
 
 import './blogsPage.css';
@@ -11,30 +11,13 @@ class blogs extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            blogs : [],
             loadCount : 0
         }
     }
 
     componentDidMount(){
-        this.loadBlogs();
+       this.props.loadBlogs(this.state.loadCount);
     }
-
-    loadBlogs = () =>{
-        fetch(`http://localhost:8000/loadBlogs?loadCount=${this.state.loadCount}`,{
-            method : 'GET',
-            headers : {
-                'Accept' : 'application/json',
-            }
-        }).then((res)=>{
-            return res.json();
-        }).then((blogsData)=>{
-            this.setState({blogs : blogsData});
-        }).catch((err)=>{
-            console.log(err)
-        })
-    }
-
 
     editHandler = (blogTitle,blogId) =>{
         this.props.history.push(`/editBlog?blogTitle=${blogTitle}&blogId=${blogId}`);
@@ -51,17 +34,16 @@ class blogs extends React.Component{
                 index : index
             })
             }).then((res)=>{
-                return res.json();
-            }).then((res)=>{
-                this.props.deleteBlogFromState(id);
-                this.setState({blogs : res});
+                if(res){
+                    this.props.deleteBlogFromState(id);
+                }
             }).catch((err)=>{
                 console.log(err);
             });
     }
 
     render() {
-        const blogs = this.state.blogs ? this.state.blogs.map((blogData,index)=>{
+        const blogs = this.props.blogs ? this.props.blogs.map((blogData,index)=>{
             return <Card title={blogData.title} info={blogData.info}
             editHandler={()=>this.editHandler(blogData.title,blogData.id)}
             deleteHandler={()=>this.deleteHandler(index,blogData.id)}
@@ -77,10 +59,17 @@ class blogs extends React.Component{
     }
 }
 
-const mapDispatchToProps = (dispatch) =>{
+const mapStateToProps = (state) =>{
     return{
-        deleteBlogFromState : (id) => {dispatch(deleteBlogFromState(id))}
+        blogs : state.blogs.blogs,
     }
 }
 
-export default connect(null,mapDispatchToProps)(withRouter(blogs));
+const mapDispatchToProps = (dispatch) =>{
+    return{
+        deleteBlogFromState : (id) => {dispatch(deleteBlogFromState(id))},
+        loadBlogs : (loadCount) =>{dispatch(loadBlogs(loadCount))}
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(withRouter(blogs));
