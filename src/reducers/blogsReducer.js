@@ -19,9 +19,9 @@ const reducer = (state = initialState, action) =>{
             const {editBlogId,editedBlog} = action.payload;
             const newarr = state.blogs.map((blog)=>{
                 if(parseInt(blog.id,10) === parseInt(editBlogId,10)){
-                    project = JSON.parse(JSON.stringify(editedBlog));
+                    blog = JSON.parse(JSON.stringify(editedBlog));
                 }
-                return project;
+                return blog;
             });
             return {
                 ...state,
