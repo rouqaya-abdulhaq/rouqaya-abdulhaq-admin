@@ -21,7 +21,8 @@ const EditBlog = (props) =>{
             body : JSON.stringify({
                 updatedBlog : {
                     title : blog.title,
-                    content : blog.content 
+                    content : blog.content,
+                    id : id
                 }
             })
         }).then((res)=>{
