@@ -1,5 +1,7 @@
 import React from 'react';
-import {withRouter} from 'react-router-dom'
+import {withRouter} from 'react-router-dom';
+import { connect} from 'react-redux';
+import {deleteBlogFromState} from '../../actions/blogs';
 import Card from '../../components/UI/card/card';
 
 import './blogsPage.css';
@@ -28,18 +30,17 @@ class blogs extends React.Component{
             return res.json();
         }).then((blogsData)=>{
             this.setState({blogs : blogsData});
-            console.log(this.state.blogs);
         }).catch((err)=>{
             console.log(err)
         })
     }
 
 
-    editHandler = (blogTitle) =>{
-        this.props.history.push(`/editBlog?blogTitle=${blogTitle}`);
+    editHandler = (blogTitle,blogId) =>{
+        this.props.history.push(`/editBlog?blogTitle=${blogTitle}&blogId=${blogId}`);
     }
 
-    deleteHandler = (index) =>{
+    deleteHandler = (index,id) =>{
         fetch('http://localhost:8000/removeBlog',{
             method : 'DELETE',
             headers : {
@@ -52,6 +53,7 @@ class blogs extends React.Component{
             }).then((res)=>{
                 return res.json();
             }).then((res)=>{
+                this.props.deleteBlogFromState(id);
                 this.setState({blogs : res});
             }).catch((err)=>{
                 console.log(err);
@@ -61,8 +63,8 @@ class blogs extends React.Component{
     render() {
         const blogs = this.state.blogs ? this.state.blogs.map((blogData,index)=>{
             return <Card title={blogData.title} info={blogData.info}
-            editHandler={()=>this.editHandler(blogData.title)}
-            deleteHandler={this.deleteHandler}
+            editHandler={()=>this.editHandler(blogData.title,blogData.id)}
+            deleteHandler={()=>this.deleteHandler(index,blogData.id)}
             index = {index}
             page={`/blog?blog=${blogData.title}`}  key={blogData.title}/>
         }) : "no blogs to display";
@@ -75,4 +77,10 @@ class blogs extends React.Component{
     }
 }
 
-export default withRouter(blogs);
+const mapDispatchToProps = (dispatch) =>{
+    return{
+        deleteBlogFromState : (id) => {dispatch(deleteBlogFromState(id))}
+    }
+}
+
+export default connect(null,mapDispatchToProps)(withRouter(blogs));

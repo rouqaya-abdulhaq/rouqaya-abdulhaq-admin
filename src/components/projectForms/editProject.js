@@ -28,7 +28,6 @@ const EditProject = (props) =>{
         }).then((res)=>{
             return res.json();
         }).then((project)=>{
-            //hard coding id for now
             props.editProjectInState(project,id);
         }).catch((err)=>{
             console.log(err)

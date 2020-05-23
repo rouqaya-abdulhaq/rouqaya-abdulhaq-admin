@@ -1,7 +1,9 @@
 import React from 'react';
+import {connect} from 'react-redux';
+import {addBlogToState} from '../../actions/blogs';
 import BlogForm from '../../containers/blogs/blogForm/blogForm';
 
-const addBlog = () =>{
+const addBlog = (props) =>{
 
     const fetchSubmit = (blog) =>{
         fetch("http://localhost:8000/postBlog",{
@@ -17,7 +19,7 @@ const addBlog = () =>{
         }).then((res)=>{
             return res.json();
         }).then((blog)=>{
-            console.log(blog);
+            props.addBlogToState(blog);
         }).catch((err)=>{
             console.log(err)
         })
@@ -28,4 +30,10 @@ const addBlog = () =>{
     );
 }
 
-export default addBlog;
+const mapDispatchToProps = (dispatch) =>{
+    return{
+        addBlogToState : (blog) => {dispatch(addBlogToState(blog))}
+    }
+}
+
+export default connect(null,mapDispatchToProps)(addBlog);
