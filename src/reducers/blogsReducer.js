@@ -17,21 +17,14 @@ const reducer = (state = initialState, action) =>{
         
         case actionTypes.EDIT_BLOG :
             const {editBlogId,editedBlog} = action.payload;
-            const newarr = state.blogs.map((blog)=>{
-                if(parseInt(blog.id,10) === parseInt(editBlogId,10)){
-                    blog = JSON.parse(JSON.stringify(editedBlog));
-                }
-                return blog;
-            });
+            const newarr = editBlog(state,editedBlog,editBlogId);
             return {
                 ...state,
                 blogs : newarr};
 
         case actionTypes.DELETE_BLOG :
             const {blogId} = action.payload; 
-            const arr =  state.blogs.filter((blog)=>{
-                return parseInt(blog.id,10) !== parseInt(blogId,10);
-            });
+            const arr = deleteBlog(state,blogId);
             return {
                 ...state,
                 blogs : arr};
@@ -62,6 +55,21 @@ const reducer = (state = initialState, action) =>{
         default : 
             return state;
     }
+}
+
+const editBlog = (state , editedBlog, editBlogId) =>{
+    return state.blogs.map((blog)=>{
+        if(parseInt(blog.id,10) === parseInt(editBlogId,10)){
+            blog = JSON.parse(JSON.stringify(editedBlog));
+        }
+        return blog;
+    });
+}
+
+const deleteBlog = (state, blogId) =>{
+    return state.blogs.filter((blog)=>{
+        return parseInt(blog.id,10) !== parseInt(blogId,10);
+    });
 }
 
 export default reducer;

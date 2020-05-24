@@ -16,21 +16,14 @@ const reducer = (state = initialState, action) =>{
 
         case actionTypes.EDIT_PROJECT :
             const {editProjectId,editedProject} = action.payload;
-            const newarr = state.projects.map((project)=>{
-                if(parseInt(project.id,10) === parseInt(editProjectId,10)){
-                    project = JSON.parse(JSON.stringify(editedProject));
-                }
-                return project;
-            });
+            const newarr = editProject(state,editedProject,editProjectId);
             return {
                 ...state,
                 projects : newarr};
 
         case actionTypes.DELETE_PROJECT :
             const {projectId} = action.payload; 
-            const arr =  state.projects.filter((project)=>{
-                return parseInt(project.id,10) !== parseInt(projectId,10);
-            });
+            const arr = deleteProject(state,projectId);
             return {
                 ...state,
                 projects : arr};
@@ -63,4 +56,18 @@ const reducer = (state = initialState, action) =>{
     }
 }
 
+const editProject = (state,editedProject, editProjectId) =>{
+    return state.projects.map((project)=>{
+        if(parseInt(project.id,10) === parseInt(editProjectId,10)){
+            project = JSON.parse(JSON.stringify(editedProject));
+        }
+        return project;
+    });
+}
+
+const deleteProject = (state,projectId) =>{
+    return state.projects.filter((project)=>{
+        return parseInt(project.id,10) !== parseInt(projectId,10);
+    });
+}
 export default reducer;
