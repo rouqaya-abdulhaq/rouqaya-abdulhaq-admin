@@ -48,7 +48,7 @@ class blogs extends React.Component{
             editHandler={()=>this.editHandler(blogData.title,blogData.id)}
             deleteHandler={()=>this.deleteHandler(index,blogData.id)}
             index = {index}
-            page={`/blog?blog=${blogData.title}`}  key={blogData.title}/>
+            key={blogData.title}/>
         }) : "no blogs to display";
 
         return(
