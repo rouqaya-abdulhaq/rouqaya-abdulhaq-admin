@@ -3,10 +3,9 @@ import React from 'react';
 import './card.css';
 
 const card = (props) =>{
-
     const website = props.url ? <a href={props.url}>url</a> : null;
     const githubPage = props.githubUrl ? <a href={props.githubUrl}>github scource</a> : null;
-    const img = props.imgPath ? <p>{props.imgPath}</p> : null;
+    const img = props.imgPath ? <img src={props.imgPath} alt="thumbnail"/> : null;
     
     return(
         <section>
