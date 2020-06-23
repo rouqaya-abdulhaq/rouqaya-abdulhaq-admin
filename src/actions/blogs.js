@@ -40,7 +40,11 @@ export const loadBlogs = (loadCount) =>{
         }).then((res)=>{
             return res.json();
         }).then((blogsData)=>{
-            dispatch(loadBlogsSuccess(blogsData));
+            if(blogsData.success){
+                dispatch(loadBlogsSuccess(blogsData.blogs));
+            }else{
+                dispatch(loadBlogsFail(blogsData.message));
+            }
         }).catch((err)=>{
             dispatch(loadBlogsFail(err));
         })

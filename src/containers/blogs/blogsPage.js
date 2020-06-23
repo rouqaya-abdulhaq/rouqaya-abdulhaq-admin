@@ -44,7 +44,7 @@ class blogs extends React.Component{
 
     render() {
         const blogs = this.props.blogs ? this.props.blogs.map((blogData,index)=>{
-            return <Card title={blogData.title} info={blogData.info}
+            return <Card title={blogData.title} imgPath={blogData.img_url}
             editHandler={()=>this.editHandler(blogData.title,blogData.id)}
             deleteHandler={()=>this.deleteHandler(index,blogData.id)}
             index = {index}

@@ -53,7 +53,7 @@ class projectsPage extends React.Component {
     render(){
         const projects = this.props.projects ? this.props.projects.map((projectData,index)=>{
             return <Card title={projectData.title} info={projectData.info}
-            url={projectData.url} githubUrl={projectData.githubUrl} imgPath={projectData.imgUrl}
+            url={projectData.url} githubUrl={projectData.github} imgPath={projectData.img_url}
             editHandler={()=>this.editHandler(projectData.title,projectData.id)}
             deleteHandler={()=>this.deleteHandler(index,projectData.id)}
             index = {index} 

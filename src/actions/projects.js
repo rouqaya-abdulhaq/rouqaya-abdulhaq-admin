@@ -40,7 +40,11 @@ export const loadProjects = (loadCount) =>{
         }).then((res)=>{
             return res.json();
         }).then((projectsData)=>{
-            dispatch(loadProjectsSuccess(projectsData));
+            if(projectsData.success){
+                dispatch(loadProjectsSuccess(projectsData.projects));
+            }else{
+                dispatch(loadProjectsFail(projectsData.message))
+            }
         }).catch((err)=>{
             dispatch(loadProjectsFail(err));
         })
