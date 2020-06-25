@@ -12,7 +12,6 @@ class AddProject extends React.Component{
                 info : "",
                 url : "",
                 imgUrl : "",
-                img : "",
             }
         }
         this.baseState = {...this.state.project};
@@ -31,8 +30,8 @@ class AddProject extends React.Component{
     }
 
     loadProject = () =>{
-        if(this.props.title){
-         fetch(`http://localhost:8000/loadProject?projectTitle=${this.props.title}`,{
+        if(this.props.id){
+         fetch(`http://localhost:8000/loadProject?projectId=${this.props.id}`,{
              method : 'GET',
              headers : {
                  'Accept': 'application/json',
@@ -40,8 +39,10 @@ class AddProject extends React.Component{
              },
          }).then((res)=>{
              return res.json();
-         }).then((project)=>{
-             this.setState({project : project});
+         }).then((res)=>{
+             if(res.success){
+                this.setState({project : res.project});
+             }
          }).catch((err)=>{
              console.log(err);
          });
@@ -75,11 +76,11 @@ class AddProject extends React.Component{
         });
     }
 
-    onChangeImgUrl = (file) =>{
+    onChangeImgUrl = (url) =>{
         this.setState({
             project : {
                 ...this.state.project,
-                img : file
+                imgUrl : url
             }
         });
     }
@@ -100,13 +101,9 @@ class AddProject extends React.Component{
                     <input placeholder="url" onChange={(event)=>this.onChangeUrl(event.target.value)}
                         value={this.state.project.url || ""}>
                     </input>
-                    <input type="file" accept="image/x-png,image/gif,image/jpeg" 
-                        name="img" id="img"
-                        onChange={(event)=>{
-                            this.onChangeImgUrl(event.target.files[0]);
-                        }}>
+                    <input placeholder="img url" onChange={(event)=>{this.onChangeImgUrl(event.target.value);}}
+                        value = {this.state.project.imgUrl || ""}>
                     </input>
-                    <label htmlFor="img">upload an img</label>
                     <textarea placeholder="info" onChange={(event)=>this.onChangeInfo(event.target.value)}
                         value={this.state.project.info || ""}>
                     </textarea>

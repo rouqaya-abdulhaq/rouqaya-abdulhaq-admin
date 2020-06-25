@@ -6,22 +6,28 @@ import ProjectForm from '../../containers/projects/projectForm/projectForm';
 const addProject = (props) =>{
 
     const fetchSubmit = (project) =>{
-        //add an id to the project in DB 
-        const formData = new FormData();
-        formData.append('img',project.img);
-        formData.append('title',project.title);
-        formData.append('info',project.info);
-        formData.append('url',project.url);
+        const projData = {
+            title : project.title,
+            url : project.url,
+            imgUrl : project.imgUrl,
+            info : project.info
+        }
+        
         fetch("http://localhost:8000/addProject",{
             method : 'POST',
             headers : {
+                'Content-Type': 'application/json',
                 'Accept': 'application/json',
             },
-            body : formData
+            body : JSON.stringify({
+                project : projData
+            })
         }).then((res)=>{
             return res.json();
-        }).then((project)=>{
-            props.addProjectToState(project);
+        }).then((res)=>{
+            if(res.success){
+                props.addProjectToState(res.project);
+            }
         }).catch((err)=>{
             console.log(err)
         })
