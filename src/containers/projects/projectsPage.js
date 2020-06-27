@@ -57,7 +57,7 @@ class projectsPage extends React.Component {
             editHandler={()=>this.editHandler(projectData.title,projectData.id)}
             deleteHandler={()=>this.deleteHandler(index,projectData.id)}
             index = {index} 
-            key={projectData.title}/>
+            key={projectData.id}/>
         }) : "no projects to display";
 
         return(

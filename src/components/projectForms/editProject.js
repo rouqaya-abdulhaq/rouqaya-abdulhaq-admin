@@ -8,34 +8,37 @@ import ProjectForm from '../../containers/projects/projectForm/projectForm';
 const EditProject = (props) =>{
     
     const values = queryString.parse(props.location.search.slice(1));
-    const title = values.projectTitle;
     const id = values.projectId;
 
     async function fetchEdit  (project) {
-        // console.log(id);
-        const formData = new FormData();
-        formData.append('img',project.img);
-        formData.append('title',project.title);
-        formData.append('info',project.info);
-        formData.append('url',project.url);
-        formData.append('id',id);
-        fetch(`http://localhost:8000/editProject?projectTitle=${title}`,{
+        fetch(`http://localhost:8000/editProject?projectId=${id}`,{
             method : 'PUT',
             headers : {
                 'Accept': 'application/json',
+                'Content-Type': 'application/json'
             },
-            body : formData
+            body : JSON.stringify({
+                updatedProject : {
+                    imgUrl : project.imgUrl,
+                    title : project.title,
+                    info : project.info,
+                    url : project.url,
+                    id : id
+                }
+            })
         }).then((res)=>{
             return res.json();
-        }).then((project)=>{
-            props.editProjectInState(project,id);
+        }).then((res)=>{
+            if(res.success){
+                props.editProjectInState(res.project,id);
+            }
         }).catch((err)=>{
             console.log(err)
         })
     }
 
     return(
-        <ProjectForm title={title} submitHandler={fetchEdit} />
+        <ProjectForm id={id} submitHandler={fetchEdit} />
     );
 }
 

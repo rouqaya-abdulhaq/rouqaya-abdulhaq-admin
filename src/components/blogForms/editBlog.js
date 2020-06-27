@@ -8,11 +8,10 @@ import BlogForm from '../../containers/blogs/blogForm/blogForm';
 const EditBlog = (props) =>{
 
     const values = queryString.parse(props.location.search.slice(1));
-    const title = values.blogTitle;
     const id = values.blogId;
 
     const fetchEdit = (blog) =>{
-        fetch(`http://localhost:8000/editBlog?blogTitle=${title}`,{
+        fetch(`http://localhost:8000/editBlog?blogId=${id}`,{
             method : 'PUT',
             headers : {
                 'Accept': 'application/json',
@@ -22,20 +21,24 @@ const EditBlog = (props) =>{
                 updatedBlog : {
                     title : blog.title,
                     content : blog.content,
+                    imgUrl : blog.imgUrl,
                     id : id
                 }
             })
         }).then((res)=>{
             return res.json();
-        }).then((blog)=>{
-            props.editBlogInState(blog,id);
+        }).then((res)=>{
+            if(res.success){
+                props.editBlogInState(res.blog,id);
+
+            }
         }).catch((err)=>{
             console.log(err)
         })
     }
 
     return(
-        <BlogForm title={title} submitHandler={fetchEdit} />
+        <BlogForm id={id} submitHandler={fetchEdit} />
     );
 }
 
