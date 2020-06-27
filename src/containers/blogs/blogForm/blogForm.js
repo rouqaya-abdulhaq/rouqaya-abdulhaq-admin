@@ -40,7 +40,8 @@ class BlogForm extends React.Component{
             return res.json();
         }).then((res)=>{
             if(res.success){
-                this.setState({blog : res.blog});
+                const blog = {...res.blog, imgUrl : res.blog.img_url}
+                this.setState({blog : blog});
             }
         }).catch((err)=>{
             console.log(err);

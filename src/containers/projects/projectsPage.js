@@ -19,10 +19,10 @@ class projectsPage extends React.Component {
         this.props.loadProjects(this.state.loadCount);
     }
 
-    editHandler = (projectTitle,projectId) =>{
+    editHandler = (projectId) =>{
         this.props.history.push({
            pathname :  '/editProject',
-           search : `?projectTitle=${projectTitle}&projectId=${projectId}`,});
+           search : `?projectId=${projectId}`,});
     }
 
     updateState = (oldStateName , newState) =>{
@@ -54,7 +54,7 @@ class projectsPage extends React.Component {
         const projects = this.props.projects ? this.props.projects.map((projectData,index)=>{
             return <Card title={projectData.title} info={projectData.info}
             url={projectData.url} githubUrl={projectData.github} imgPath={projectData.img_url}
-            editHandler={()=>this.editHandler(projectData.title,projectData.id)}
+            editHandler={()=>this.editHandler(projectData.id)}
             deleteHandler={()=>this.deleteHandler(index,projectData.id)}
             index = {index} 
             key={projectData.id}/>

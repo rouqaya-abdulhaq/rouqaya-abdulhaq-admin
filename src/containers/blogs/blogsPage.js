@@ -19,8 +19,8 @@ class blogs extends React.Component{
        this.props.loadBlogs(this.state.loadCount);
     }
 
-    editHandler = (blogTitle,blogId) =>{
-        this.props.history.push(`/editBlog?blogTitle=${blogTitle}&blogId=${blogId}`);
+    editHandler = (blogId) =>{
+        this.props.history.push(`/editBlog?blogId=${blogId}`);
     }
 
     deleteHandler = (index,id) =>{
@@ -45,7 +45,7 @@ class blogs extends React.Component{
     render() {
         const blogs = this.props.blogs ? this.props.blogs.map((blogData,index)=>{
             return <Card title={blogData.title} imgPath={blogData.img_url}
-            editHandler={()=>this.editHandler(blogData.title,blogData.id)}
+            editHandler={()=>this.editHandler(blogData.id)}
             deleteHandler={()=>this.deleteHandler(index,blogData.id)}
             index = {index}
             key={blogData.id}/>
