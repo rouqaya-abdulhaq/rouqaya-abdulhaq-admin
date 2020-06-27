@@ -13,13 +13,17 @@ const addBlog = (props) =>{
                 'Content-Type': 'application/json'
             },
             body : JSON.stringify({
-                title : blog.title,
-                content : blog.content
+                blog : { title : blog.title,
+                content : blog.content,
+                imgUrl : blog.imgUrl
+                }
             })
         }).then((res)=>{
             return res.json();
-        }).then((blog)=>{
-            props.addBlogToState(blog);
+        }).then((res)=>{
+            if(res.success){
+                props.addBlogToState(res.blog);
+            }
         }).catch((err)=>{
             console.log(err)
         })

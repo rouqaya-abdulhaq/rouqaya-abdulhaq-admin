@@ -9,7 +9,8 @@ class BlogForm extends React.Component{
         this.state = {
             blog : {
                 title : "",
-                content : ""
+                content : "",
+                imgUrl : ""
             }
         }
         this.baseState = this.state;
@@ -28,8 +29,8 @@ class BlogForm extends React.Component{
     }
 
     loadBlog = () =>{
-       if(this.props.title){
-        fetch(`http://localhost:8000/loadBlog?blogTitle=${this.props.title}`,{
+       if(this.props.id){
+        fetch(`http://localhost:8000/loadBlog?blogId=${this.props.id}`,{
             method : 'GET',
             headers : {
                 'Accept': 'application/json',
@@ -37,8 +38,10 @@ class BlogForm extends React.Component{
             },
         }).then((res)=>{
             return res.json();
-        }).then((blog)=>{
-            this.setState({blog : blog});
+        }).then((res)=>{
+            if(res.success){
+                this.setState({blog : res.blog});
+            }
         }).catch((err)=>{
             console.log(err);
         });
@@ -49,7 +52,18 @@ class BlogForm extends React.Component{
         this.setState({
             blog :  {
                 title : event.target.value,
-                content : this.state.blog.content
+                content : this.state.blog.content,
+                imgUrl : this.state.blog.imgUrl
+            }
+        })
+    }
+
+    imgUrlEventHandler = (event) =>{
+        this.setState({
+            blog :  {
+                imgUrl : event.target.value,
+                content : this.state.blog.content,
+                title : this.state.blog.title
             }
         })
     }
@@ -58,7 +72,8 @@ class BlogForm extends React.Component{
         this.setState({
             blog :  {
                 content : event.target.value,
-                title : this.state.blog.title
+                title : this.state.blog.title,
+                imgUrl : this.state.blog.imgUrl
             }
         })
     }
@@ -74,6 +89,9 @@ class BlogForm extends React.Component{
             <main className="addBlogPage">
                 <input className="title" onChange={this.titleEventHandler} 
                     placeholder="title" value={this.state.blog.title || ''}>
+                </input>
+                <input className="imgUrl" onChange={this.imgUrlEventHandler} 
+                    placeholder="img url" value={this.state.blog.imgUrl || ''}>
                 </input>
                 <textarea  onChange={this.contentEventHandler} 
                     placeholder="content" value={this.state.blog.content || ''}>
