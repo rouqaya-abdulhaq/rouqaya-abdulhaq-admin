@@ -29,7 +29,7 @@ class projectsPage extends React.Component {
         this.setState({[oldStateName] : newState})
     }
 
-    deleteHandler = (index,id) =>{
+    deleteHandler = (id) =>{
         fetch('http://localhost:8000/removeProject',{
             method : 'DELETE',
             headers : {
@@ -37,10 +37,12 @@ class projectsPage extends React.Component {
                 'Content-Type': 'application/json'
             },
             body : JSON.stringify({
-                index : index
+                id : id
             })
             }).then((res)=>{
-                if(res){
+                return res.json();
+            }).then((res)=>{
+                if (res.success){
                     this.props.deleteProjectFromState(id);
                 }
             }).catch((err)=>{
@@ -51,12 +53,11 @@ class projectsPage extends React.Component {
     
     
     render(){
-        const projects = this.props.projects ? this.props.projects.map((projectData,index)=>{
+        const projects = this.props.projects ? this.props.projects.map((projectData)=>{
             return <Card title={projectData.title} info={projectData.info}
             url={projectData.url} githubUrl={projectData.github} imgPath={projectData.img_url}
             editHandler={()=>this.editHandler(projectData.id)}
-            deleteHandler={()=>this.deleteHandler(index,projectData.id)}
-            index = {index} 
+            deleteHandler={()=>this.deleteHandler(projectData.id)}
             key={projectData.id}/>
         }) : "no projects to display";
 

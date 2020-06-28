@@ -23,7 +23,7 @@ class blogs extends React.Component{
         this.props.history.push(`/editBlog?blogId=${blogId}`);
     }
 
-    deleteHandler = (index,id) =>{
+    deleteHandler = (id) =>{
         fetch('http://localhost:8000/removeBlog',{
             method : 'DELETE',
             headers : {
@@ -31,10 +31,12 @@ class blogs extends React.Component{
                 'Content-Type': 'application/json'
             },
             body : JSON.stringify({
-                index : index
+                id : id
             })
             }).then((res)=>{
-                if(res){
+                return res.json();
+            }).then((res)=>{
+                if(res.success){
                     this.props.deleteBlogFromState(id);
                 }
             }).catch((err)=>{
@@ -43,11 +45,10 @@ class blogs extends React.Component{
     }
 
     render() {
-        const blogs = this.props.blogs ? this.props.blogs.map((blogData,index)=>{
+        const blogs = this.props.blogs ? this.props.blogs.map((blogData)=>{
             return <Card title={blogData.title} imgPath={blogData.img_url}
             editHandler={()=>this.editHandler(blogData.id)}
-            deleteHandler={()=>this.deleteHandler(index,blogData.id)}
-            index = {index}
+            deleteHandler={()=>this.deleteHandler(blogData.id)}
             key={blogData.id}/>
         }) : "no blogs to display";
 
