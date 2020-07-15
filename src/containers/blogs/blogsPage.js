@@ -23,6 +23,10 @@ class blogs extends React.Component{
         this.props.history.push(`/editBlog?blogId=${blogId}`);
     }
 
+    translationHandler = (blogId) =>{
+        this.props.history.push(`translateBlog?blogId=${blogId}`);
+    }
+
     deleteHandler = (id) =>{
         fetch('http://localhost:8000/removeBlog',{
             method : 'DELETE',
@@ -49,6 +53,7 @@ class blogs extends React.Component{
             return <Card title={blogData.title} imgPath={blogData.img_url}
             editHandler={()=>this.editHandler(blogData.id)}
             deleteHandler={()=>this.deleteHandler(blogData.id)}
+            translationHandler = {()=>this.translationHandler(blogData.id)}
             key={blogData.id}/>
         }) : "no blogs to display";
 
