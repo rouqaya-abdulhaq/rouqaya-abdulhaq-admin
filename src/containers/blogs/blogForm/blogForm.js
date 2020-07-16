@@ -18,6 +18,7 @@ class BlogForm extends React.Component{
 
     componentDidMount(){
         this.loadBlog();
+        this.loadTranslation();
     }
 
     shouldComponentUpdate(nextProps,nextState){
@@ -29,7 +30,7 @@ class BlogForm extends React.Component{
     }
 
     loadBlog = () =>{
-       if(this.props.id){
+       if(this.props.id && !this.props.translation){
         fetch(`http://localhost:8000/loadBlog?blogId=${this.props.id}`,{
             method : 'GET',
             headers : {
@@ -47,6 +48,12 @@ class BlogForm extends React.Component{
             console.log(err);
         });
        } 
+    }
+
+    loadTranslation = () =>{
+        if(this.props.translation && this.props.id){
+            console.log("getting translation");
+        }
     }
 
     titleEventHandler = (event) =>{
@@ -85,19 +92,22 @@ class BlogForm extends React.Component{
         this.props.history.push('/blogs');
     }
 
+    submit = this.props.readOnly ? null : <button onClick={this.submitBlogHandler}>SUBMIT</button>
+
     render(){
+        const img = this.props.translation ? null : <input className="imgUrl" onChange={this.imgUrlEventHandler} 
+                                                        placeholder="img url" value={this.state.blog.imgUrl || ''}>
+                                                    </input>
         return(
             <main className="addBlogPage">
                 <input className="title" onChange={this.titleEventHandler} 
                     placeholder="title" value={this.state.blog.title || ''}>
                 </input>
-                <input className="imgUrl" onChange={this.imgUrlEventHandler} 
-                    placeholder="img url" value={this.state.blog.imgUrl || ''}>
-                </input>
+                {img}
                 <textarea  onChange={this.contentEventHandler} 
                     placeholder="content" value={this.state.blog.content || ''}>
                 </textarea>
-                <button onClick={this.submitBlogHandler}>SUBMIT</button>
+                {this.submit}
             </main>
         );
     }
