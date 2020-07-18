@@ -52,8 +52,23 @@ class BlogForm extends React.Component{
 
     loadTranslation = () =>{
         if(this.props.translation && this.props.id){
-            console.log("getting translation");
-        }
+            fetch(`http://localhost:8000/getArabicBlog?blogId=${this.props.id}`,{
+                method : 'GET',
+                headers : {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+            }).then((res)=>{
+                return res.json();
+            }).then((res)=>{
+                if(res.success){
+                    const blog = {...res.blog}
+                    this.setState({blog : blog});
+                }
+            }).catch((err)=>{
+                console.log(err);
+            });
+            }
     }
 
     titleEventHandler = (event) =>{
