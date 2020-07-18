@@ -114,7 +114,7 @@ class BlogForm extends React.Component{
                                                         placeholder="img url" value={this.state.blog.imgUrl || ''}>
                                                     </input>
         return(
-            <main className="addBlogPage">
+            <main className="addBlogPage" dir={this.props.translation ? "rtl" : "ltr"}>
                 <input className="title" onChange={this.titleEventHandler} 
                     placeholder="title" value={this.state.blog.title || ''}>
                 </input>
