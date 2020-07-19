@@ -24,7 +24,7 @@ class blogs extends React.Component{
     }
 
     translationHandler = (blogId) =>{
-        this.props.history.push(`translateBlog?blogId=${blogId}`);
+        this.props.history.push(`editTranslatedBlog?blogId=${blogId}`);
     }
 
     deleteHandler = (id) =>{

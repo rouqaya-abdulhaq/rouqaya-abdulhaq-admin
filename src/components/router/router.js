@@ -7,7 +7,7 @@ import Blogs from '../../containers/blogs/blogsPage';
 import Projects from '../../containers/projects/projectsPage';
 import EditBlog from '../blogForms/editBlog';
 import EditProject from '../projectForms/editProject';
-import TranslateBlog from '../blogForms/translateBlog';
+import EditTranslatedBlog from '../blogForms/editTranslatedBlog';
 
 const router = () =>{
     return(
@@ -19,7 +19,7 @@ const router = () =>{
             <Route path="/projects" component={Projects}/>
             <Route path="/editBlog" component={EditBlog}/>
             <Route path="/editProject" component={EditProject}/>
-            <Route path="/translateBlog" component={TranslateBlog}/>
+            <Route path="/editTranslatedBlog" component={EditTranslatedBlog}/>
         </Switch>
     );
 }
