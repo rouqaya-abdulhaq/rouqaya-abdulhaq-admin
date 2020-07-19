@@ -7,6 +7,7 @@ import Blogs from '../../containers/blogs/blogsPage';
 import Projects from '../../containers/projects/projectsPage';
 import EditBlog from '../blogForms/editBlog';
 import EditProject from '../projectForms/editProject';
+import AddBlogTranslation from '../blogForms/addBlogTranslation';
 import EditTranslatedBlog from '../blogForms/editTranslatedBlog';
 
 const router = () =>{
@@ -19,6 +20,7 @@ const router = () =>{
             <Route path="/projects" component={Projects}/>
             <Route path="/editBlog" component={EditBlog}/>
             <Route path="/editProject" component={EditProject}/>
+            <Route path="/addTranslation" component={AddBlogTranslation}/>
             <Route path="/editTranslatedBlog" component={EditTranslatedBlog}/>
         </Switch>
     );

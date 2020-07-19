@@ -51,7 +51,7 @@ class BlogForm extends React.Component{
     }
 
     loadTranslation = () =>{
-        if(this.props.translation && this.props.id){
+        if(this.props.translation && this.props.id && this.props.load){
             fetch(`http://localhost:8000/getArabicBlog?blogId=${this.props.id}`,{
                 method : 'GET',
                 headers : {

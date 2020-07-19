@@ -23,7 +23,11 @@ class blogs extends React.Component{
         this.props.history.push(`/editBlog?blogId=${blogId}`);
     }
 
-    translationHandler = (blogId) =>{
+    addTranslationHandler = (blogId) =>{
+        this.props.history.push(`addTranslation?blogId=${blogId}`);
+    }
+
+    editTranslationHandler = (blogId) =>{
         this.props.history.push(`editTranslatedBlog?blogId=${blogId}`);
     }
 
@@ -53,7 +57,8 @@ class blogs extends React.Component{
             return <Card title={blogData.title} imgPath={blogData.img_url}
             editHandler={()=>this.editHandler(blogData.id)}
             deleteHandler={()=>this.deleteHandler(blogData.id)}
-            translationHandler = {()=>this.translationHandler(blogData.id)}
+            editTranslationHandler = {()=>this.editTranslationHandler(blogData.id)}
+            addTranslationHandler = {()=>this.addTranslationHandler(blogData.id)}
             key={blogData.id}/>
         }) : "no blogs to display";
 

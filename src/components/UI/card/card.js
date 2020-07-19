@@ -6,7 +6,8 @@ const card = (props) =>{
     const website = props.url ? <a href={props.url}>url</a> : null;
     const githubPage = props.githubUrl ? <a href={props.githubUrl}>github scource</a> : null;
     const img = props.imgPath ? <img src={props.imgPath} alt="thumbnail"/> : null;
-    const translation = props.translationHandler ? <button onClick={props.translationHandler}>edit translation</button> : null;
+    const editTranslation = props.editTranslationHandler ? <button onClick={props.editTranslationHandler}>edit translation</button> : null;
+    const addTranslation = props.addTranslationHandler ? <button onClick={props.addTranslationHandler}>add translation</button> : null;
     
     return(
         <section>
@@ -18,7 +19,8 @@ const card = (props) =>{
 
             <button onClick={props.editHandler}>edit</button>
             <button onClick={props.deleteHandler}>delete</button>
-            {translation}
+            {addTranslation}
+            {editTranslation}
         </section>
     );
 }
