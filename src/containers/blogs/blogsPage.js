@@ -5,6 +5,7 @@ import {deleteBlogFromState ,loadBlogs} from '../../actions/blogs';
 import Card from '../../components/UI/card/card';
 
 import './blogsPage.css';
+import { loadArabicTranslations } from '../../actions/blogsArabic';
 
 class blogs extends React.Component{
 
@@ -17,6 +18,7 @@ class blogs extends React.Component{
 
     componentDidMount(){
        this.props.loadBlogs(this.state.loadCount);
+       this.props.loadArabicTranslations(this.state.loadCount);
     }
 
     editHandler = (blogId) =>{
@@ -53,6 +55,7 @@ class blogs extends React.Component{
     }
 
     render() {
+        console.log(this.props.translations);
         const blogs = this.props.blogs ? this.props.blogs.map((blogData)=>{
             return <Card title={blogData.title} imgPath={blogData.img_url}
             editHandler={()=>this.editHandler(blogData.id)}
@@ -73,13 +76,15 @@ class blogs extends React.Component{
 const mapStateToProps = (state) =>{
     return{
         blogs : state.blogs.blogs,
+        translations : state.blogs.translations
     }
 }
 
 const mapDispatchToProps = (dispatch) =>{
     return{
         deleteBlogFromState : (id) => {dispatch(deleteBlogFromState(id))},
-        loadBlogs : (loadCount) =>{dispatch(loadBlogs(loadCount))}
+        loadBlogs : (loadCount) =>{dispatch(loadBlogs(loadCount))},
+        loadArabicTranslations : (loadCount) =>{dispatch(loadArabicTranslations(loadCount))}
     }
 }
 
