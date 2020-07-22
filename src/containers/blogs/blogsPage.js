@@ -55,13 +55,20 @@ class blogs extends React.Component{
     }
 
     render() {
-        console.log(this.props.translations);
         const blogs = this.props.blogs ? this.props.blogs.map((blogData)=>{
+
+            const isTranslated = this.props.translations.map((translation)=>{
+                if(translation.id === blogData.id){
+                    return true;
+                }
+                return false;
+            });
             return <Card title={blogData.title} imgPath={blogData.img_url}
             editHandler={()=>this.editHandler(blogData.id)}
             deleteHandler={()=>this.deleteHandler(blogData.id)}
             editTranslationHandler = {()=>this.editTranslationHandler(blogData.id)}
             addTranslationHandler = {()=>this.addTranslationHandler(blogData.id)}
+            isTranslated = {isTranslated}
             key={blogData.id}/>
         }) : "no blogs to display";
 
