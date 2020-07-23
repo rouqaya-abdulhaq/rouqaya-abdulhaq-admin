@@ -1,7 +1,9 @@
 import React from 'react';
 import {withRouter} from 'react-router-dom';
+import {connect} from 'react-redux';
 import queryString from 'querystring';
 import BlogForm from '../../containers/blogs/blogForm/blogForm';
+import {editArabicTranslation} from '../../actions/blogsArabic';
 
 const EditTranslatedBlog = (props) =>{
 
@@ -26,7 +28,7 @@ const EditTranslatedBlog = (props) =>{
             return res.json();
         }).then((res)=>{
             if(res.success){
-                console.log(res.blog);
+                props.editArabicTranslation(res.blog,id);
             }
         }).catch((err)=>{
             console.log(err)
@@ -42,4 +44,10 @@ const EditTranslatedBlog = (props) =>{
     );
 }
 
-export default withRouter(EditTranslatedBlog);
+const mapDispatchToProps = (dispatch) =>{
+    return {
+        editArabicTranslation : (translation,id) =>{dispatch(editArabicTranslation(translation,id))}
+    }
+}
+
+export default connect(null,mapDispatchToProps)(withRouter(EditTranslatedBlog));
