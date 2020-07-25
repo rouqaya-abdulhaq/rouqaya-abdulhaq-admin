@@ -10,10 +10,13 @@ const header = (props) =>{
     const projectsLinks = [{value : "add project",path : "/addProject"},
                             {value : "view projects", path : "/projects"},];
 
+    const aboutLinks = [{value : "view about page",path : "/about"}];
+
     return(
         <header>
             <NavList value="blogs" links={blogsLinks}/>
             <NavList value="projects" links={projectsLinks}/>
+            <NavList value="about" links={aboutLinks}/>
         </header>
     );
 }

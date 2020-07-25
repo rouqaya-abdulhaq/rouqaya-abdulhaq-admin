@@ -9,6 +9,7 @@ import EditBlog from '../blogForms/editBlog';
 import EditProject from '../projectForms/editProject';
 import AddBlogTranslation from '../blogForms/addBlogTranslation';
 import EditTranslatedBlog from '../blogForms/editTranslatedBlog';
+import About from '../../containers/about/aboutPage';
 
 const router = () =>{
     return(
@@ -22,6 +23,7 @@ const router = () =>{
             <Route path="/editProject" component={EditProject}/>
             <Route path="/addTranslation" component={AddBlogTranslation}/>
             <Route path="/editTranslatedBlog" component={EditTranslatedBlog}/>
+            <Route path="/about" component={About}/>
         </Switch>
     );
 }
