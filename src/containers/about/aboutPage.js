@@ -30,12 +30,32 @@ class About extends React.Component{
         })
     }
 
-    changeEventHandler = (event) =>{
-        this.setState({about : event.target.value});
+    editAbout = () =>{
+        fetch('http://localhost:8000/editAbout',{
+            method : 'PUT',
+            headers : {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body : JSON.stringify({
+                data : {
+                    content : this.state.about
+                }
+            })
+        }).then((res)=>{
+            return res.json();
+        }).then((res)=>{
+            if(res.success){
+                const about = {...res.about};
+                this.setState({about : about.content});
+            }
+        }).catch((err)=>{
+            console.log(err);
+        })
     }
 
-    submitEventHandler = () =>{
-        console.log(this.state.about);
+    changeEventHandler = (event) =>{
+        this.setState({about : event.target.value});
     }
 
     render(){
@@ -44,7 +64,7 @@ class About extends React.Component{
                 <textarea  onChange={this.changeEventHandler} 
                     placeholder="content" value={this.state.about|| ''}>
                 </textarea>
-                <button onClick={this.submitEventHandler}>
+                <button onClick={this.editAbout}>
                     Submit
                 </button>
             </main>
