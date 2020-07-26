@@ -8,6 +8,28 @@ class About extends React.Component{
         }
     }
 
+    componentDidMount(){
+        this.loadAbout();
+    }
+
+    loadAbout = () =>{
+        fetch('http://localhost:8000/loadAbout',{
+            method : 'GET',
+            headers : {
+                'Accept': 'application/json',
+            },
+        }).then((res)=>{
+            return res.json();
+        }).then((res)=>{
+            if(res.success){
+                const about = {...res.about};
+                this.setState({about : about.content});
+            }
+        }).catch((err)=>{
+            console.log(err);
+        })
+    }
+
     changeEventHandler = (event) =>{
         this.setState({about : event.target.value});
     }
