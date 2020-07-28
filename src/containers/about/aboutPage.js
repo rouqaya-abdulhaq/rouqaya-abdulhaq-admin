@@ -1,4 +1,5 @@
 import React from 'react';
+import './about.css';
 
 class About extends React.Component{
     constructor(props){
@@ -60,8 +61,8 @@ class About extends React.Component{
 
     render(){
         return(
-            <main>
-                <textarea  onChange={this.changeEventHandler} 
+            <main className="aboutPage">
+                <textarea onChange={this.changeEventHandler} 
                     placeholder="content" value={this.state.about|| ''}>
                 </textarea>
                 <button onClick={this.editAbout}>
