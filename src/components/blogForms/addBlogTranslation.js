@@ -10,8 +10,10 @@ const AddBlogTranslation = (props) =>{
     const values = queryString.parse(props.location.search.slice(1));
     const id = values.blogId;
 
+    const proxyUrl = "https://aqueous-coast-32163.herokuapp.com/";
+
     const fetchSubmit = (blog) =>{
-        fetch(`http://localhost:8000/translateBlogArabic`,{
+        fetch(proxyUrl + `https://rouqaya-api.herokuapp.com/translateBlogArabic`,{
             method : 'POST',
             headers : {
                 'Accept': 'application/json',

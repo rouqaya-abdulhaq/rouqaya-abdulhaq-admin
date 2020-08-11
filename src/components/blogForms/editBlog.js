@@ -11,7 +11,10 @@ const EditBlog = (props) =>{
     const id = values.blogId;
 
     const fetchEdit = (blog) =>{
-        fetch(`http://localhost:8000/editBlog?blogId=${id}`,{
+
+        const proxyUrl = "https://aqueous-coast-32163.herokuapp.com/";
+        
+        fetch(proxyUrl + `https://rouqaya-api.herokuapp.com/editBlog?blogId=${id}`,{
             method : 'PUT',
             headers : {
                 'Accept': 'application/json',

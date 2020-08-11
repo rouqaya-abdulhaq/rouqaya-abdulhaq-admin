@@ -33,8 +33,10 @@ class blogs extends React.Component{
         this.props.history.push(`editTranslatedBlog?blogId=${blogId}`);
     }
 
+    proxyUrl = "https://aqueous-coast-32163.herokuapp.com/";
+
     deleteHandler = (id) =>{
-        fetch('http://localhost:8000/removeBlog',{
+        fetch(this.proxyUrl + 'https://rouqaya-api.herokuapp.com/removeBlog',{
             method : 'DELETE',
             headers : {
                 'Accept': 'application/json',

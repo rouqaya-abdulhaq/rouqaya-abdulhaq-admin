@@ -5,8 +5,10 @@ import BlogForm from '../../containers/blogs/blogForm/blogForm';
 
 const addBlog = (props) =>{
 
+    const proxyUrl = "https://aqueous-coast-32163.herokuapp.com/";
+
     const fetchSubmit = (blog) =>{
-        fetch("http://localhost:8000/postBlog",{
+        fetch(proxyUrl + "https://rouqaya-api.herokuapp.com/postBlog",{
             method : 'PUT',
             headers : {
                 'Accept': 'application/json',

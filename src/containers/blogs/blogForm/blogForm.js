@@ -29,9 +29,11 @@ class BlogForm extends React.Component{
         }
     }
 
+    proxyUrl = "https://aqueous-coast-32163.herokuapp.com/";
+
     loadBlog = () =>{
        if(this.props.id && !this.props.translation){
-        fetch(`http://localhost:8000/loadBlog?blogId=${this.props.id}`,{
+        fetch(this.proxyUrl + `https://rouqaya-api.herokuapp.com/loadBlog?blogId=${this.props.id}`,{
             method : 'GET',
             headers : {
                 'Accept': 'application/json',
@@ -52,7 +54,7 @@ class BlogForm extends React.Component{
 
     loadTranslation = () =>{
         if(this.props.translation && this.props.id && this.props.load){
-            fetch(`http://localhost:8000/getArabicBlog?blogId=${this.props.id}`,{
+            fetch(this.proxyUrl + `https://rouqaya-api.herokuapp.com/getArabicBlog?blogId=${this.props.id}`,{
                 method : 'GET',
                 headers : {
                     'Accept': 'application/json',

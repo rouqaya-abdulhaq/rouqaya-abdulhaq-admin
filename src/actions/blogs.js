@@ -32,7 +32,7 @@ export const loadBlogs = (loadCount) =>{
     return dispatch => {
         dispatch(loadBlogsStart());
 
-        fetch(`http://localhost:8000/loadBlogs?loadCount=${loadCount}`,{
+        fetch(proxyUrl + `https://rouqaya-api.herokuapp.com/loadBlogs?loadCount=${loadCount}`,{
             method : 'GET',
             headers : {
                 'Accept' : 'application/json',
@@ -50,6 +50,8 @@ export const loadBlogs = (loadCount) =>{
         })
     }
 }
+
+const proxyUrl = "https://aqueous-coast-32163.herokuapp.com/";
 
 const loadBlogsStart = () =>{
     return {

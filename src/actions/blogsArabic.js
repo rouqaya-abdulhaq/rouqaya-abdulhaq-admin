@@ -24,7 +24,7 @@ export const loadArabicTranslations = (loadCount) =>{
     return dispatch => {
         dispatch(loadArabicTranslationStart());
 
-        fetch(`http://localhost:8000/getArabicBlogs?loadCount=${loadCount}`,{
+        fetch(proxyUrl + `https://rouqaya-api.herokuapp.com/getArabicBlogs?loadCount=${loadCount}`,{
             method : 'GET',
             headers : {
                 'Accept' : 'application/json',
@@ -42,6 +42,8 @@ export const loadArabicTranslations = (loadCount) =>{
         })
     }
 }
+
+const proxyUrl = "https://aqueous-coast-32163.herokuapp.com/";
 
 const loadArabicTranslationStart = () =>{
     return {
