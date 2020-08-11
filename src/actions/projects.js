@@ -32,7 +32,7 @@ export const loadProjects = (loadCount) =>{
     return dispatch => {
         dispatch(loadProjectsStart());
 
-        fetch(`http://localhost:8000/loadProjects?loadCount=${loadCount}`,{
+        fetch(proxyUrl + `https://rouqaya-api.herokuapp.com/loadProjects?loadCount=${loadCount}`,{
             method : 'GET',
             headers : {
                 'Accept' : 'application/json',
@@ -50,6 +50,8 @@ export const loadProjects = (loadCount) =>{
         })
     }
 }
+
+const proxyUrl = "https://aqueous-coast-32163.herokuapp.com/";
 
 const loadProjectsStart = () =>{
     return {

@@ -29,9 +29,11 @@ class AddProject extends React.Component{
         }
     }
 
+    proxyUrl = "https://aqueous-coast-32163.herokuapp.com/";
+
     loadProject = () =>{
         if(this.props.id){
-         fetch(`http://localhost:8000/loadProject?projectId=${this.props.id}`,{
+         fetch(this.proxyUrl + `https://rouqaya-api.herokuapp.com/loadProject?projectId=${this.props.id}`,{
              method : 'GET',
              headers : {
                  'Accept': 'application/json',

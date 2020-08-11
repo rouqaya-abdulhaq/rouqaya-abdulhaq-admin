@@ -5,6 +5,8 @@ import ProjectForm from '../../containers/projects/projectForm/projectForm';
 
 const addProject = (props) =>{
 
+    const proxyUrl = "https://aqueous-coast-32163.herokuapp.com/";
+
     const fetchSubmit = (project) =>{
         const projData = {
             title : project.title,
@@ -13,7 +15,7 @@ const addProject = (props) =>{
             info : project.info
         }
         
-        fetch("http://localhost:8000/addProject",{
+        fetch(proxyUrl + "https://rouqaya-api.herokuapp.com/addProject",{
             method : 'POST',
             headers : {
                 'Content-Type': 'application/json',

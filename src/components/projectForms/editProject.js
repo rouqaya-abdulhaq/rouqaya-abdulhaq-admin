@@ -10,8 +10,10 @@ const EditProject = (props) =>{
     const values = queryString.parse(props.location.search.slice(1));
     const id = values.projectId;
 
+    const proxyUrl = "https://aqueous-coast-32163.herokuapp.com/";
+
     async function fetchEdit  (project) {
-        fetch(`http://localhost:8000/editProject?projectId=${id}`,{
+        fetch(proxyUrl + `https://rouqaya-api.herokuapp.com/editProject?projectId=${id}`,{
             method : 'PUT',
             headers : {
                 'Accept': 'application/json',

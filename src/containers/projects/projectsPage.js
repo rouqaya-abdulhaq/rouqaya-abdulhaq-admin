@@ -29,8 +29,10 @@ class projectsPage extends React.Component {
         this.setState({[oldStateName] : newState})
     }
 
+    proxyUrl = "https://aqueous-coast-32163.herokuapp.com/";
+
     deleteHandler = (id) =>{
-        fetch('http://localhost:8000/removeProject',{
+        fetch(this.proxyUrl + 'https://rouqaya-api.herokuapp.com/removeProject',{
             method : 'DELETE',
             headers : {
                 'Accept': 'application/json',

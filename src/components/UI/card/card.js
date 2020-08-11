@@ -6,8 +6,8 @@ const card = (props) =>{
     const website = props.url ? <a href={props.url}>url</a> : null;
     const githubPage = props.githubUrl ? <a href={props.githubUrl}>github scource</a> : null;
     const img = props.imgPath ? <img src={props.imgPath} alt="thumbnail"/> : null;
-    const editTranslation = props.isTranslated.includes(true) ? <button onClick={props.editTranslationHandler}>edit translation</button> : null;
-    const addTranslation = !props.isTranslated.includes(true) ? <button onClick={props.addTranslationHandler}>add translation</button> : null;
+    const editTranslation = props.isTranslated ? props.isTranslated.includes(true) ? <button onClick={props.editTranslationHandler}>edit translation</button> : null : null;
+    const addTranslation =  props.isTranslated ? !props.isTranslated.includes(true) ? <button onClick={props.addTranslationHandler}>add translation</button> : null : null;
     
     return(
         <section>
