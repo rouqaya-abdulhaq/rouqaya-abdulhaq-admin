@@ -15,8 +15,10 @@ class About extends React.Component{
         this.loadAboutTranslation();
     }
 
+    proxyUrl = "https://aqueous-coast-32163.herokuapp.com/";
+
     loadAbout = () =>{
-        fetch('http://localhost:8000/loadAbout',{
+        fetch(this.proxyUrl + 'https://rouqaya-api.herokuapp.com/loadAbout',{
             method : 'GET',
             headers : {
                 'Accept': 'application/json',
@@ -34,7 +36,7 @@ class About extends React.Component{
     }
 
     loadAboutTranslation = () =>{
-        fetch('http://localhost:8000/loadAboutTranslation',{
+        fetch(this.proxyUrl + 'https://rouqaya-api.herokuapp.com/loadAboutTranslation',{
             method : 'GET',
             headers : {
                 'Accept': 'application/json',
@@ -52,7 +54,7 @@ class About extends React.Component{
     }
 
     editAbout = () =>{
-        fetch('http://localhost:8000/editAbout',{
+        fetch(this.proxyUrl + 'https://rouqaya-api.herokuapp.com/editAbout',{
             method : 'PUT',
             headers : {
                 'Accept': 'application/json',
@@ -76,7 +78,7 @@ class About extends React.Component{
     }
 
     editAboutTranslation = () =>{
-        fetch('http://localhost:8000/editAboutTranslation',{
+        fetch(this.proxyUrl + 'https://rouqaya-api.herokuapp.com/editAboutTranslation',{
             method : 'PUT',
             headers : {
                 'Accept': 'application/json',
