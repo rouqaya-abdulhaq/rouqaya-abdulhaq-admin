@@ -12,6 +12,7 @@ const addProject = (props) =>{
             title : project.title,
             url : project.url,
             imgUrl : project.imgUrl,
+            github : project.github,
             info : project.info
         }
         

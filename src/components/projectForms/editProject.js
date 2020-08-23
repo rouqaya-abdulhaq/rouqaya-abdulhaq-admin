@@ -21,6 +21,7 @@ const EditProject = (props) =>{
             },
             body : JSON.stringify({
                 updatedProject : {
+                    github : project.github,
                     imgUrl : project.imgUrl,
                     title : project.title,
                     info : project.info,

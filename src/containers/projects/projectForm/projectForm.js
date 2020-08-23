@@ -11,6 +11,7 @@ class AddProject extends React.Component{
                 title : "",
                 info : "",
                 url : "",
+                github : "",
                 imgUrl : "",
             }
         }
@@ -79,6 +80,15 @@ class AddProject extends React.Component{
         });
     }
 
+    onChangeGithub = (value) =>{
+        this.setState({
+            project : {
+                ...this.state.project,
+                github : value
+            }
+        });
+    }
+
     onChangeImgUrl = (url) =>{
         this.setState({
             project : {
@@ -103,6 +113,9 @@ class AddProject extends React.Component{
                     </input>
                     <input placeholder="url" onChange={(event)=>this.onChangeUrl(event.target.value)}
                         value={this.state.project.url || ""}>
+                    </input>
+                    <input placeholder="github" onChange={(event)=>this.onChangeGithub(event.target.value)}
+                        value={this.state.project.github || ""}>
                     </input>
                     <input placeholder="img url" onChange={(event)=>{this.onChangeImgUrl(event.target.value);}}
                         value = {this.state.project.imgUrl || ""}>
