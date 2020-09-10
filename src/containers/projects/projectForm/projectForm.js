@@ -100,11 +100,10 @@ class AddProject extends React.Component{
     }
 
     onChangeDisableUrl = () =>{
-        const bool = this.state.project.disableUrl;
         this.setState({
             project : {
                 ...this.state.project,
-                disableUrl : !bool
+                disableUrl : !this.state.project.disableUrl
             }
         });
     }

@@ -3,7 +3,7 @@ import React from 'react';
 import './card.css';
 
 const card = (props) =>{
-    const website = props.url ? <a href={props.url}>url</a> : null;
+    const website = props.disableUrl ?  <p>not deployed yet</p> : props.url ? <a href={props.url}>url</a> : null;
     const githubPage = props.githubUrl ? <a href={props.githubUrl}>github scource</a> : null;
     const img = props.imgPath ? <img src={props.imgPath} alt="thumbnail"/> : null;
     const editTranslation = props.isTranslated ? props.isTranslated.includes(true) ? <button onClick={props.editTranslationHandler}>edit translation</button> : null : null;
