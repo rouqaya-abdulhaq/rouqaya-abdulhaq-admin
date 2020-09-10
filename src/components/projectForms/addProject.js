@@ -13,7 +13,8 @@ const addProject = (props) =>{
             url : project.url,
             imgUrl : project.imgUrl,
             github : project.github,
-            info : project.info
+            info : project.info,
+            disableUrl : project.disableUrl
         }
         
         fetch(proxyUrl + "https://rouqaya-api.herokuapp.com/addProject",{

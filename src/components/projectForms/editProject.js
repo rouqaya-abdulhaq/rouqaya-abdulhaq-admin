@@ -26,7 +26,8 @@ const EditProject = (props) =>{
                     title : project.title,
                     info : project.info,
                     url : project.url,
-                    id : id
+                    id : id,
+                    disableUrl : project.disableUrl
                 }
             })
         }).then((res)=>{

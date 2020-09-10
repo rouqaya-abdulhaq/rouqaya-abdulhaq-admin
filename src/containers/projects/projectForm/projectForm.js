@@ -13,6 +13,7 @@ class AddProject extends React.Component{
                 url : "",
                 github : "",
                 imgUrl : "",
+                disableUrl : false
             }
         }
         this.baseState = {...this.state.project};
@@ -97,6 +98,16 @@ class AddProject extends React.Component{
             }
         });
     }
+
+    onChangeDisableUrl = () =>{
+        const bool = this.state.project.disableUrl;
+        this.setState({
+            project : {
+                ...this.state.project,
+                disableUrl : !bool
+            }
+        });
+    }
     
     onSubmit = () =>{
         this.props.submitHandler(this.state.project);
@@ -123,6 +134,8 @@ class AddProject extends React.Component{
                     <textarea placeholder="info" onChange={(event)=>this.onChangeInfo(event.target.value)}
                         value={this.state.project.info || ""}>
                     </textarea>
+                    <label>Disable Url</label>
+                    <input type="checkbox" onChange={this.onChangeDisableUrl}/>
                     <button type="button" onClick={this.onSubmit}>submit</button>
                 </form>
             </main>
