@@ -45,7 +45,7 @@ class AddProject extends React.Component{
              return res.json();
          }).then((res)=>{
              if(res.success){
-                 const project = {...res.project, imgUrl : res.project.img_url}
+                 const project = {...res.project, imgUrl : res.project.img_url, disableUrl: res.project.disable_url}
                 this.setState({project : project});
              }
          }).catch((err)=>{

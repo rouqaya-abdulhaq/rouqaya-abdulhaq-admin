@@ -60,6 +60,7 @@ class projectsPage extends React.Component {
             url={projectData.url} githubUrl={projectData.github} imgPath={projectData.img_url}
             editHandler={()=>this.editHandler(projectData.id)}
             deleteHandler={()=>this.deleteHandler(projectData.id)}
+            disableUrl={projectData.disable_url}
             key={projectData.id}/>
         }) : "no projects to display";
 
